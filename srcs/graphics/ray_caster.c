@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_caster.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:51:18 by antauber          #+#    #+#             */
-/*   Updated: 2025/03/13 17:48:10 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/03/19 08:31:24 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ static void	init_ray(t_ray *ray)
 	if (ray->ray_dir_x == 0)
 		ray->delta_dist_x = 1e30;
 	else
-		ray->delta_dist_x = fabs(1.0 / ray->ray_dir_x);
+		ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
 	if (ray->ray_dir_y == 0)
 		ray->delta_dist_y = 1e30;
 	else
-		ray->delta_dist_y = fabs(1.0 / ray->ray_dir_y);
+		ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
 }
 
 void	set_player_dir(t_ray *ray, char dir)

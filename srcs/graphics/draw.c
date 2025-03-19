@@ -6,7 +6,7 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:55:45 by antauber          #+#    #+#             */
-/*   Updated: 2025/03/18 10:36:57 by antauber         ###   ########.fr       */
+/*   Updated: 2025/03/19 08:25:29 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	find_texture_pixel(t_text *text, t_ray *ray)
 	text->x = (int)(ray->wall_x * 64);
 	if (!ray->side && ray->ray_dir_x > 0)
 		text->x = 64 - text->x - 1;
-	if (ray->side && ray->ray_dir_x < 0)
+	if (ray->side && ray->ray_dir_y < 0)
 		text->x = 64 - text->x - 1;
 	text->step = 1.0 * (double)64 / ray->line_height;
 	text->pos = (ray->draw_start - WIN_HEIGHT / 2 + ray->line_height / 2) * text->step;
