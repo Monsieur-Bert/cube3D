@@ -3,18 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bert <bert@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 15:14:14 by antauber          #+#    #+#             */
-/*   Updated: 2025/01/25 16:15:33 by antauber         ###   ########.fr       */
+/*   Updated: 2025/03/20 08:38:31 by bert             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_pow(int nb, int power)
 {
-	int	res;
-
-	res = 1;
 	if (power < 0)
 		return (0);
 	else if (power == 0)
