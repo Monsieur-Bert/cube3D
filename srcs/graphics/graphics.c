@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bert <bert@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:25:41 by antauber          #+#    #+#             */
-/*   Updated: 2025/03/13 17:52:40 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/03/20 09:10:13 by bert             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ int	render(t_cube *cube)
 {
 	if (cube->mlx.win != NULL)
 	{
-		draw_background(&cube->mlx.render);
+		draw_background(cube);
 		raycaster(cube);
 		mlx_put_image_to_window(cube->mlx.init, cube->mlx.win, cube->mlx.render.img, 0, 0);
 	}
@@ -169,7 +169,6 @@ void	graphics(t_cube *cube)
 	cube->mlx.render.addr = mlx_get_data_addr(cube->mlx.render.img, &cube->mlx.render.bpp, &cube->mlx.render.line_len, &cube->mlx.render.endian);
 	if (!cube->mlx.render.addr)
 		free_error(cube, ERR_MLX_RENDER);
-	//draw_background(&cube->mlx.render);
 	cube->ray.pos_x = cube->map.pos.x + 0.5;
 	cube->ray.pos_y = cube->map.pos.y + 0.5;
 	set_player_dir(&cube->ray, cube->map.pos.pos);

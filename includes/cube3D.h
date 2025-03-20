@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3D.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
+/*   By: bert <bert@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:19:57 by ygorget           #+#    #+#             */
-/*   Updated: 2025/03/13 17:44:04 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/03/20 09:10:30 by bert             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	raycaster(t_cube *cube);
 void	set_player_dir(t_ray *ray, char dir);
 
 //draw
-void	draw_background(t_img *img);
+void	draw_background(t_cube *cube);
 void	ft_put_pixel(t_img *img, int x, int y, int color);
 void	draw_walls(t_ray *ray, t_mlx *mlx);
 

@@ -3,30 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bert <bert@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:55:45 by antauber          #+#    #+#             */
-/*   Updated: 2025/03/19 08:25:29 by antauber         ###   ########.fr       */
+/*   Updated: 2025/03/20 09:20:01 by bert             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cube3D.h>
 
-void	draw_background(t_img *img)
+void	draw_background(t_cube *cube)
 {
 	int	x;
 	int	y;
-	int ceiling = 0x002bfafa; //todo remplacer par données structure
-	int floor = 0x00a42424;
+	int	ceiling;
+	int	floor;
 
+	ceiling = (cube->map.c.r << 16) | (cube->map.c.g << 8) | cube->map.c.b;
+	floor = (cube->map.f.r << 16) | (cube->map.f.g << 8) | cube->map.f.b;
 	x = 0;
 	while (x < WIN_WIDTH)
 	{
 		y = 0;
 		while (y < WIN_HEIGHT / 2)
-			ft_put_pixel(img, x, y++, ceiling);
+			ft_put_pixel(&cube->mlx.render, x, y++, ceiling);
 		while (y < WIN_HEIGHT)
-			ft_put_pixel(img, x, y++, floor);
+			ft_put_pixel(&cube->mlx.render, x, y++, floor);
 		x++;
 	}
 }
@@ -36,9 +38,9 @@ void	ft_put_pixel(t_img *img, int x, int y, int color)
 	int	pixel;
 
 	pixel = y * img->line_len + x * img->bpp / 8;
-	img->addr[pixel] = color & 0xFF;
-	img->addr[pixel + 1] = (color >> 8) & 0xFF;
-	img->addr[pixel + 2] = (color >> 16) & 0xFF;
+	img->addr[pixel] = color & 255;
+	img->addr[pixel + 1] = (color >> 8) & 255;
+	img->addr[pixel + 2] = (color >> 16) & 255;
 }
 
 static void	find_texture_pixel(t_text *text, t_ray *ray)
