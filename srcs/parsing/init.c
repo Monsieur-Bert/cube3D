@@ -6,7 +6,7 @@
 /*   By: bert <bert@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:45:14 by ygorget           #+#    #+#             */
-/*   Updated: 2025/03/20 08:39:22 by bert             ###   ########.fr       */
+/*   Updated: 2025/03/20 09:25:41 by bert             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ int	no_space(char *rgb)
 	return (0);
 }
 
-int	rgb(t_color *color, t_texture *img)
+int	rgb(t_color *color, char *str)
 {
 	char	**rgb;
 
-	rgb = ft_split(img->f, ',');
+	rgb = ft_split(str, ',');
 	if (!rgb)
 	{
 		print_error(ERR_MALLOC);
@@ -92,9 +92,9 @@ int	init_struct(char **tab, t_texture *img, t_map *map)
 	map->img.so = img->so;
 	map->img.we = img->we;
 	map->img.ea = img->ea;
-	if (rgb(&map->f, img) == 1)
+	if (rgb(&map->f, img->f) == 1)
 		return (1);
-	if (rgb(&map->c, img) == 1)
+	if (rgb(&map->c, img->c) == 1)
 		return (1);
 	return (0);
 }

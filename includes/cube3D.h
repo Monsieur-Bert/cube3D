@@ -6,7 +6,7 @@
 /*   By: bert <bert@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:19:57 by ygorget           #+#    #+#             */
-/*   Updated: 2025/03/20 09:10:30 by bert             ###   ########.fr       */
+/*   Updated: 2025/03/20 09:26:09 by bert             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		texture(char **tab, t_texture *img);
 
 //init.c
 void	init_texture(t_texture *img);
-int		rgb(t_color *color, t_texture *img);
+int		rgb(t_color *color, char *str);  
 int		init_struct(char **tab, t_texture *img, t_map *map);
 
 //maps_utils.c
