@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bert <bert@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:25:41 by antauber          #+#    #+#             */
-/*   Updated: 2025/03/20 09:10:13 by bert             ###   ########.fr       */
+/*   Updated: 2025/03/24 16:53:20 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,9 +146,10 @@ static bool	get_walls_textures(t_mlx *mlx, t_map *map)
 int	render(t_cube *cube)
 {
 	if (cube->mlx.win != NULL)
-	{
+	{	
 		draw_background(cube);
 		raycaster(cube);
+		minimap(cube);
 		mlx_put_image_to_window(cube->mlx.init, cube->mlx.win, cube->mlx.render.img, 0, 0);
 	}
 	return (0);

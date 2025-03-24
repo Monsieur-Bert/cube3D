@@ -6,7 +6,7 @@
 /*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 13:23:12 by ygorget           #+#    #+#             */
-/*   Updated: 2025/03/13 16:30:13 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/03/24 16:21:32 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,12 @@ typedef	struct	s_cube
 	t_map	map;
 	t_ray	ray;
 }	t_cube;
+
+enum e_minimap
+{
+	WALL = 0x000000,
+	FLOOR = 0xbfc9ca,
+	PLAYER = 0xffffff,
+};
 
 #endif

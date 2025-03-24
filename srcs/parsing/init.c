@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bert <bert@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:45:14 by ygorget           #+#    #+#             */
-/*   Updated: 2025/03/20 09:25:41 by bert             ###   ########.fr       */
+/*   Updated: 2025/03/24 10:37:18 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,11 @@ int	rgb(t_color *color, char *str)
 	color->r = ft_atoi(rgb[0]);
 	color->g = ft_atoi(rgb[1]);
 	color->b = ft_atoi(rgb[2]);
+	if (color->r > 255 || color->g > 255 || color->b > 255)
+	{
+		print_error(ERR_VALUE);
+		return (1);
+	}	
 	ft_free_tabstr(rgb);
 	return (0);
 }

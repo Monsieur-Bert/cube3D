@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3D.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bert <bert@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:19:57 by ygorget           #+#    #+#             */
-/*   Updated: 2025/03/20 09:26:09 by bert             ###   ########.fr       */
+/*   Updated: 2025/03/24 16:10:53 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,9 @@ void	init_mlx(t_mlx *mlx);
 void	graphics(t_cube *cube);
 
 //keyhooks
-int handle_keyhooks(int keysym, t_cube *cube);
+int     handle_keyhooks(int keysym, t_cube *cube);
+
+//minimap
+void    minimap(t_cube *cube);
 
 #endif
