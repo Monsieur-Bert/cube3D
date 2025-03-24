@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+         #
+#    By: antauber <antauber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 08:19:19 by antauber          #+#    #+#              #
-#    Updated: 2025/03/13 16:44:33 by ygorget          ###   ########.fr        #
+#    Updated: 2025/03/24 13:24:50 by antauber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,7 @@ MLX 		=	minilibx-linux/libmlx_Linux.a
 MFLAG		=	--no-print-directory
 SILENCE		=	--silent >/dev/null
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g -MMD -MP
+CFLAGS		=	-Wall -Wextra -Werror -g -MMD -MP -pg
 
 RM			:=	rm -rf
 DIR_DUP		=	mkdir -p $(@D)

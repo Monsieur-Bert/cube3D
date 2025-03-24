@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3D.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bert <bert@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:19:57 by ygorget           #+#    #+#             */
-/*   Updated: 2025/03/20 09:26:09 by bert             ###   ########.fr       */
+/*   Updated: 2025/03/24 15:14:07 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # include <X11/X.h>
 # include <math.h>
 # include <unistd.h>
+# include <sys/time.h>
 
 # include "../libft/includes/libft.h"
 # include "../minilibx-linux/mlx.h"
@@ -53,7 +54,7 @@ int		texture(char **tab, t_texture *img);
 
 //init.c
 void	init_texture(t_texture *img);
-int		rgb(t_color *color, char *str);  
+int		rgb(int *parsed_color, char *str);
 int		init_struct(char **tab, t_texture *img, t_map *map);
 
 //maps_utils.c
@@ -92,8 +93,6 @@ void	draw_background(t_cube *cube);
 void	ft_put_pixel(t_img *img, int x, int y, int color);
 void	draw_walls(t_ray *ray, t_mlx *mlx);
 
-
-
 //graphics
 void	free_walls_textures(t_mlx *mlx);
 void	free_mlx(t_mlx *mlx);
@@ -101,7 +100,10 @@ int		close_window(t_cube *cube);
 void	init_mlx(t_mlx *mlx);
 void	graphics(t_cube *cube);
 
-//keyhooks
-int handle_keyhooks(int keysym, t_cube *cube);
+//hooks
+int		key_press(int keysym, t_cube *cube);
+int		key_release(int keysym, t_cube *cube);
+void	move_player(t_cube *cube, double delta_time);
+
 
 #endif
