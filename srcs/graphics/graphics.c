@@ -201,6 +201,7 @@ int	render(t_cube *cube)
 		draw_background(cube);
 		move_player(cube, delta_time);
 		raycaster(cube);
+		minimap(cube);
 		mlx_put_image_to_window(cube->mlx.init, cube->mlx.win, cube->mlx.render.img, 0, 0);
 	}
 	return (0);

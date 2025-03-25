@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3D.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:19:57 by ygorget           #+#    #+#             */
-/*   Updated: 2025/03/24 15:14:07 by antauber         ###   ########.fr       */
+/*   Updated: 2025/03/24 16:10:53 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,9 @@ void	free_mlx(t_mlx *mlx);
 int		close_window(t_cube *cube);
 void	init_mlx(t_mlx *mlx);
 void	graphics(t_cube *cube);
+
+//minimap
+void    minimap(t_cube *cube);
 
 //hooks
 int		key_press(int keysym, t_cube *cube);

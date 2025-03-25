@@ -6,7 +6,7 @@
 /*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 13:21:55 by ygorget           #+#    #+#             */
-/*   Updated: 2025/03/13 16:42:04 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/03/24 10:37:10 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define ERR_CEILING	"the ceiling color is missing\n"
 # define ERR_SPACES		"there are spaces in the information given\n"
 # define ERR_COLOR		"one of the RGB colors is missing\n"
+# define ERR_VALUE      "the color is larger than 255\n"
 # define ERR_NO_IMG		"there aren't image\n"
 # define ERR_FILE		"it's not .cub\n"
 # define ERR_RGB		"there are whitespaces between numbers\n"
