@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:25:41 by antauber          #+#    #+#             */
-/*   Updated: 2025/03/24 16:53:20 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/03/24 16:40:50 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	free_walls_textures(t_mlx *mlx)
 void	free_mlx(t_mlx *mlx)
 {
 	free_walls_textures(mlx);
+	free(mlx->keys);
 	if (mlx->render.img != NULL)
 	{
 		mlx_destroy_image(mlx->init, mlx->render.img);
@@ -87,6 +88,19 @@ static void	init_img(t_img *img)
 	img->endian = 0;
 }
 
+void	set_keystab(t_cube *cube)
+{
+	int	i;
+
+	i = 0;
+	cube->mlx.keys = malloc((sizeof(int) * Q_QUIT + 1));
+	if (cube->mlx.keys == NULL)
+		free_error(cube, ERR_MALLOC);
+	cube->mlx.keys[i] = true;
+	while (++i <= Q_QUIT)
+		cube->mlx.keys[i] = false;
+}
+
 void	init_mlx(t_mlx *mlx)
 {
 	init_img(&mlx->render);
@@ -94,6 +108,7 @@ void	init_mlx(t_mlx *mlx)
 	init_img(&mlx->wall_so);
 	init_img(&mlx->wall_we);
 	init_img(&mlx->wall_ea);
+	mlx->keys = NULL;
 	mlx->init = NULL;
 	mlx->win = NULL;
 }
@@ -143,11 +158,48 @@ static bool	get_walls_textures(t_mlx *mlx, t_map *map)
 	return (true);
 }
 
+bool	is_moving(t_mlx *mlx)
+{
+	int	i;
+
+	if (mlx->keys[0] == true)
+	{
+		mlx->keys[0] = false;
+		return (true);
+	}
+	i = 0;
+	while (i < Q_QUIT)
+	{
+		if (mlx->keys[i] == true)
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
+double	get_time_in_seconds(void)
+{
+	struct timeval	tv;
+	
+	gettimeofday(&tv, NULL);
+	return ((double)tv.tv_sec + (double)tv.tv_usec / 1000000.0);
+}
+
 int	render(t_cube *cube)
 {
-	if (cube->mlx.win != NULL)
-	{	
+	static double	last_time = 0;
+	double			curr_time;
+	double			delta_time;
+
+	curr_time = get_time_in_seconds();
+	if (last_time == 0)
+		last_time = curr_time;
+	delta_time = curr_time - last_time;
+	last_time = curr_time;
+	if (cube->mlx.win != NULL && is_moving(&cube->mlx))
+	{
 		draw_background(cube);
+		move_player(cube, delta_time);
 		raycaster(cube);
 		minimap(cube);
 		mlx_put_image_to_window(cube->mlx.init, cube->mlx.win, cube->mlx.render.img, 0, 0);
@@ -172,11 +224,13 @@ void	graphics(t_cube *cube)
 		free_error(cube, ERR_MLX_RENDER);
 	cube->ray.pos_x = cube->map.pos.x + 0.5;
 	cube->ray.pos_y = cube->map.pos.y + 0.5;
+	set_keystab(cube);
 	set_player_dir(&cube->ray, cube->map.pos.pos);
 	cube->ray.x = 0;
 	mlx_loop_hook(cube->mlx.init, &render, cube);
 	mlx_hook(cube->mlx.win, DestroyNotify, StructureNotifyMask, close_window, cube);
-	mlx_hook(cube->mlx.win, KeyPress, KeyPressMask, handle_keyhooks, cube);
+	mlx_hook(cube->mlx.win, KeyPress, KeyPressMask, key_press, cube);
+	mlx_hook(cube->mlx.win, KeyRelease, KeyReleaseMask, key_release, cube);
 	if (!get_walls_textures(&cube->mlx, &cube->map))
 		free_error(cube, ERR_MLX_TEXT);
 	mlx_loop(cube->mlx.init);

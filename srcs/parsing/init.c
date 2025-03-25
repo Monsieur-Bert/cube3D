@@ -41,9 +41,10 @@ int	no_space(char *rgb)
 	return (0);
 }
 
-int	rgb(t_color *color, char *str)
+int	rgb(int *parsed_color, char *str)
 {
 	char	**rgb;
+	t_color	color;
 
 	rgb = ft_split(str, ',');
 	if (!rgb)
@@ -63,8 +64,9 @@ int	rgb(t_color *color, char *str)
 	{
 		print_error(ERR_VALUE);
 		return (1);
-	}	
+	}
 	ft_free_tabstr(rgb);
+	*parsed_color = (color.r << 16) | (color.g << 8) | color.b;
 	return (0);
 }
 
@@ -97,9 +99,9 @@ int	init_struct(char **tab, t_texture *img, t_map *map)
 	map->img.so = img->so;
 	map->img.we = img->we;
 	map->img.ea = img->ea;
-	if (rgb(&map->f, img->f) == 1)
+	if (rgb(&map->floor, img->f) == 1)
 		return (1);
-	if (rgb(&map->c, img->c) == 1)
+	if (rgb(&map->ceiling, img->c) == 1)
 		return (1);
 	return (0);
 }

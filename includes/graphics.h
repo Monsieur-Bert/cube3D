@@ -13,10 +13,10 @@
 #ifndef GRAPHICS_H
 # define GRAPHICS_H
 
-# define WIN_WIDTH	640
+# define WIN_WIDTH	920
 # define WIN_HEIGHT	480
-# define MOVE_SPEED	0.32
-# define ROT_SPEED	0.20
+# define MOVE_SPEED	10.5
+# define ROT_SPEED	4.5
 
 typedef	struct s_ray
 {
@@ -73,6 +73,7 @@ typedef struct s_mlx
 {
 	void	*init;
 	void	*win;
+	int		*keys;
 	t_img	render;
 	t_img	wall_no;
 	t_img	wall_so;
@@ -80,5 +81,16 @@ typedef struct s_mlx
 	t_img	wall_ea;
 }	t_mlx;
 
+enum	e_key_hooks
+{
+	START,
+	W_MV_FOR,
+	S_MV_BACK,
+	A_MV_LEFT,
+	D_MV_RIGHT,
+	L_RT_LEFT,
+	R_RT_RIGHT,
+	Q_QUIT,
+};
 
 #endif

@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 13:23:12 by ygorget           #+#    #+#             */
 /*   Updated: 2025/03/24 16:21:32 by ygorget          ###   ########.fr       */
@@ -54,8 +54,8 @@ typedef struct s_map
 	char	**map;
 	t_pos	pos;
 	t_wall	img;
-	t_color	f;
-	t_color	c;
+	int		floor;
+	int		ceiling;
 }	t_map;
 
 typedef struct s_buff
