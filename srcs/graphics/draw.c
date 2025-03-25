@@ -6,7 +6,7 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:55:45 by antauber          #+#    #+#             */
-/*   Updated: 2025/03/24 16:26:17 by antauber         ###   ########.fr       */
+/*   Updated: 2025/03/25 15:48:23 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,11 @@ void	draw_background(t_cube *cube)
 	int	y;
 
 	x = 0;
+	dprintf(2, "offset is = [%f]\n", cube->ray.offset);
 	while (x < WIN_WIDTH)
 	{
 		y = 0;
-		while (y < WIN_HEIGHT / 2)
+		while (y < WIN_HEIGHT / 2 + cube->ray.offset && y < WIN_HEIGHT)
 			ft_put_pixel(&cube->mlx.render, x, y++, cube->map.ceiling);
 		while (y < WIN_HEIGHT)
 			ft_put_pixel(&cube->mlx.render, x, y++, cube->map.floor);
@@ -47,7 +48,7 @@ static void	find_texture_pixel(t_text *text, t_ray *ray)
 	if (ray->side && ray->ray_dir_y < 0)
 		text->x = 64 - text->x - 1;
 	text->step = 1.0 * (double)64 / ray->line_height;
-	text->pos = (ray->draw_start - WIN_HEIGHT / 2 + ray->line_height / 2) * text->step;
+	text->pos = (ray->draw_start - (WIN_HEIGHT / 2 + ray->offset) + ray->line_height / 2) * text->step;
 }
 
 static void	add_wall_texture(t_img *img, t_img *wall, t_ray *ray)
@@ -76,11 +77,11 @@ static void	add_wall_texture(t_img *img, t_img *wall, t_ray *ray)
 
 void	draw_walls(t_ray *ray, t_mlx *mlx)
 {
-	ray->line_height = (int)(WIN_HEIGHT / ray->perp_wall_dist);
-	ray->draw_start = - ray->line_height / 2 + WIN_HEIGHT / 2;
+	ray->line_height = (int)((WIN_HEIGHT)  / ray->perp_wall_dist);
+	ray->draw_start = - ray->line_height / 2 + (WIN_HEIGHT / 2 + ray->offset);
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;
-	ray->draw_end = (ray->line_height / 2) + (WIN_HEIGHT / 2);
+	ray->draw_end = (ray->line_height / 2) + (WIN_HEIGHT / 2 + ray->offset);
 	if (ray->draw_end >= WIN_HEIGHT)
 		ray->draw_end = WIN_HEIGHT - 1;
 	if (ray->side == 0)

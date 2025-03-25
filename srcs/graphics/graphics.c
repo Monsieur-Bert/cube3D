@@ -6,7 +6,7 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:25:41 by antauber          #+#    #+#             */
-/*   Updated: 2025/03/25 11:31:36 by antauber         ###   ########.fr       */
+/*   Updated: 2025/03/25 14:52:29 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,6 @@ void	init_mlx(t_mlx *mlx)
 	mlx->init = NULL;
 	mlx->win = NULL;
 }
-
 
 static bool	get_walls_addr(t_mlx *mlx)
 {
@@ -222,11 +221,15 @@ void	graphics(t_cube *cube)
 	cube->mlx.render.addr = mlx_get_data_addr(cube->mlx.render.img, &cube->mlx.render.bpp, &cube->mlx.render.line_len, &cube->mlx.render.endian);
 	if (!cube->mlx.render.addr)
 		free_error(cube, ERR_MLX_RENDER);
+
+	// INIT VALUES############################
+	cube->ray.offset = 0;
 	cube->ray.pos_x = cube->map.pos.x + 0.5;
 	cube->ray.pos_y = cube->map.pos.y + 0.5;
 	set_keystab(cube);
 	set_player_dir(&cube->ray, cube->map.pos.pos);
 	cube->ray.x = 0;
+	//########################################
 	mlx_loop_hook(cube->mlx.init, &render, cube);
 	mlx_hook(cube->mlx.win, DestroyNotify, StructureNotifyMask, close_window, cube);
 	mlx_hook(cube->mlx.win, KeyPress, KeyPressMask, key_press, cube);

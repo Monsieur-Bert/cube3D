@@ -6,7 +6,7 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:43:37 by ygorget           #+#    #+#             */
-/*   Updated: 2025/03/25 10:53:55 by antauber         ###   ########.fr       */
+/*   Updated: 2025/03/25 15:59:48 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,10 @@ void	move_player(t_cube *cube, double delta_time)
 		rotate_player(&cube->ray, 1, ROT_SPEED * delta_time);
 	if (cube->mlx.keys[L_RT_LEFT] == true)
 		rotate_player(&cube->ray, -1, ROT_SPEED * delta_time);
+	if (cube->mlx.keys[U_RT_UP] == true && (WIN_HEIGHT / 2 + cube->ray.offset < WIN_HEIGHT))
+		cube->ray.offset += 600 * delta_time;
+	if (cube->mlx.keys[D_RT_DOWN] == true && (WIN_HEIGHT / 2 + cube->ray.offset > 0))
+		cube->ray.offset -= 600 * delta_time; 
 }
 
 int	key_press(int keysym, t_cube *cube)
@@ -71,6 +75,10 @@ int	key_press(int keysym, t_cube *cube)
 		cube->mlx.keys[R_RT_RIGHT] = true;
 	if (keysym == XK_Left)
 		cube->mlx.keys[L_RT_LEFT] = true;
+	if (keysym == XK_Up)
+		cube->mlx.keys[U_RT_UP] = true;
+	if (keysym == XK_Down)
+		cube->mlx.keys[D_RT_DOWN] = true;
 	if (keysym == XK_Escape || keysym == XK_q)
 		close_window(cube);
 	return (0);
@@ -90,5 +98,9 @@ int	key_release(int keysym, t_cube *cube)
 		cube->mlx.keys[R_RT_RIGHT] = false;
 	if (keysym == XK_Left)
 		cube->mlx.keys[L_RT_LEFT] = false;
+	if (keysym == XK_Up)
+		cube->mlx.keys[U_RT_UP] = false;
+	if (keysym == XK_Down)
+		cube->mlx.keys[D_RT_DOWN] = false;
 	return (0);
 }

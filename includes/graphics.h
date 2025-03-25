@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:34:53 by antauber          #+#    #+#             */
-/*   Updated: 2025/03/24 11:42:06 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/03/25 15:58:59 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define WIN_WIDTH	920
 # define WIN_HEIGHT	480
 # define MOVE_SPEED	10.5
-# define ROT_SPEED	4.5
+# define ROT_SPEED	2.5
 
 typedef	struct s_ray
 {
@@ -44,6 +44,7 @@ typedef	struct s_ray
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
+	double	offset;
 	double	wall_x;
 }	t_ray;
 
@@ -90,6 +91,8 @@ enum	e_key_hooks
 	D_MV_RIGHT,
 	L_RT_LEFT,
 	R_RT_RIGHT,
+	U_RT_UP,
+	D_RT_DOWN,
 	Q_QUIT,
 };
 
