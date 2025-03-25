@@ -6,17 +6,17 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:34:53 by antauber          #+#    #+#             */
-/*   Updated: 2025/03/24 15:11:55 by antauber         ###   ########.fr       */
+/*   Updated: 2025/03/25 10:55:04 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GRAPHICS_H
 # define GRAPHICS_H
 
-# define WIN_WIDTH	640
+# define WIN_WIDTH	920
 # define WIN_HEIGHT	480
 # define MOVE_SPEED	10.5
-# define ROT_SPEED	0.025
+# define ROT_SPEED	4.5
 
 typedef	struct s_ray
 {

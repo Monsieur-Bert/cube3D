@@ -6,7 +6,7 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:43:37 by ygorget           #+#    #+#             */
-/*   Updated: 2025/03/24 14:52:28 by antauber         ###   ########.fr       */
+/*   Updated: 2025/03/25 10:53:55 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,18 @@ static void	rotate_player(t_ray *ray, int dir, double speed)
 
 void	move_player(t_cube *cube, double delta_time)
 {
-	double	speed = MOVE_SPEED * delta_time;
-
 	if (cube->mlx.keys[W_MV_FOR] == true)
-		move_forward_backward(cube, 1, speed);
+		move_forward_backward(cube, 1, MOVE_SPEED * delta_time);
 	if (cube->mlx.keys[S_MV_BACK] == true)
-		move_forward_backward(cube, -1, speed);
+		move_forward_backward(cube, -1, MOVE_SPEED * delta_time);
 	if (cube->mlx.keys[D_MV_RIGHT] == true)
-		move_right_left(cube, 1, speed);
+		move_right_left(cube, 1, MOVE_SPEED * delta_time);
 	if (cube->mlx.keys[A_MV_LEFT] == true)
-		move_right_left(cube, -1, speed);
+		move_right_left(cube, -1, MOVE_SPEED * delta_time);
 	if (cube->mlx.keys[R_RT_RIGHT] == true)
-		rotate_player(&cube->ray, 1, speed);
+		rotate_player(&cube->ray, 1, ROT_SPEED * delta_time);
 	if (cube->mlx.keys[L_RT_LEFT] == true)
-		rotate_player(&cube->ray, -1, speed);
+		rotate_player(&cube->ray, -1, ROT_SPEED * delta_time);
 }
 
 int	key_press(int keysym, t_cube *cube)
