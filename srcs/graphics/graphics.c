@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:25:41 by antauber          #+#    #+#             */
-/*   Updated: 2025/03/25 11:15:33 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/03/25 11:31:36 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,12 @@ void	set_keystab(t_cube *cube)
 	int	i;
 
 	i = 0;
-	cube->mlx.keys = malloc((sizeof(int) * Q_QUIT + 1));
+	cube->mlx.keys = malloc((sizeof(int) * (Q_QUIT + 1)));
 	if (cube->mlx.keys == NULL)
 		free_error(cube, ERR_MALLOC);
-	cube->mlx.keys[i] = true;
-	while (++i <= Q_QUIT)
-		cube->mlx.keys[i] = false;
+	cube->mlx.keys[i++] = true;
+	while (i <= Q_QUIT)
+		cube->mlx.keys[i++] = false;
 }
 
 void	init_mlx(t_mlx *mlx)

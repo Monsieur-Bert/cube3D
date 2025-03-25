@@ -1,4 +1,6 @@
 gmon.out
+libft/.build
+libft/libft.a
 .build
 .vscode
 cube3D
