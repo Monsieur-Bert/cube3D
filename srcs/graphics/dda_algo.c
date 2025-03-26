@@ -6,7 +6,7 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:55:08 by antauber          #+#    #+#             */
-/*   Updated: 2025/03/25 15:51:45 by antauber         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:29:50 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,6 @@ void	perform_dda(t_ray *ray, char **map)
 		ray->perp_wall_dist = (ray->side_dist_x - ray->delta_dist_x);
 	else
 		ray->perp_wall_dist = (ray->side_dist_y - ray->delta_dist_y);
-	//! calculate wall_dist aauberti version
-	// if (!ray->side)
-	// 	ray->perp_wall_dist = (ray->map_x - ray->pos_x + (1 - ray->step_x) / 2)
-	// 		/ ray->ray_dir_x;
-	// else
-	// 	ray->perp_wall_dist = (ray->map_y - ray->pos_y + (1 - ray->step_y) / 2)
-	// 		/ ray->ray_dir_y;
 }
 
 void	find_step_dda(t_ray *ray)

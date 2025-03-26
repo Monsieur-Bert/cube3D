@@ -6,7 +6,7 @@
 #    By: antauber <antauber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 08:19:19 by antauber          #+#    #+#              #
-#    Updated: 2025/03/25 16:15:08 by antauber         ###   ########.fr        #
+#    Updated: 2025/03/26 16:23:45 by antauber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,8 +59,7 @@ MLX 		=	minilibx-linux/libmlx_Linux.a
 MFLAG		=	--no-print-directory
 SILENCE		=	--silent >/dev/null
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -MMD -MP -g
-DEBUGFLAGS	=	-g -pg
+CFLAGS		=	-Wall -Wextra -Werror -MMD -MP
 
 RM			:=	rm -rf
 DIR_DUP		=	mkdir -p $(@D)
@@ -111,22 +110,6 @@ endef
 
 all: $(LIBFT) $(MLX) $(NAME)
 
-## DEBUG RULES ############################################################## ##
-debug: CFLAGS += $(DEBUGFLAGS)
-debug: $(OBJS) $(LIBFT) $(MLX)
-	@printf "\n\n${RED}DEBUGING MAKE $(DEBUG)${RESET}\n"
-	@printf "\n\n${BLUE}Linking objects into $(DEBUG)${RESET}\n"
-	@$(CC) $(CFLAGS) $(DEBUGFLAGS) $^ -L$(LIB_DIR) -lft -L$(MLX_DIR)\
-	-lmlx -lXext -lX11 -lm -lz -o $@
-	@echo "${GREEN}Binary $(DEBUG) successfully created for debug${RESET}"
-
-$(BUILD_DIR)/%.o: $(SRCS_DIR)/%.c
-	@$(DIR_DUP)
-	$(PROGRESS_BAR)
-	@$(CC) $(CFLAGS) $(DEBUGFLAGS) -I$(INC) -I$(LIB_DIR) -I$(MLX_DIR) -o $@ -c $<
-## ########################################################################## ##
-
-
 $(NAME): $(OBJS)
 	@printf "\n\n${BLUE}Linking objects into debug${RESET}\n"
 	@$(CC) $(CFLAGS) $^ -L$(LIB_DIR) -lft -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz -o $@
@@ -143,7 +126,7 @@ $(LIBFT):
 $(BUILD_DIR)/%.o: $(SRCS_DIR)/%.c
 	@$(DIR_DUP)
 	$(PROGRESS_BAR)
-	@$(CC) $(CFLAGS) -I$(INC) -I$(LIB_DIR) -I$(MLX_DIR) -o $@ -c $<
+	@$(CC) $(CFLAGS) -I$(INC) -I$(LIB_DIR) -I$(MLX_DIR) -O3 -Ofast -o $@ -c $<
 
 clean:
 	@$(MAKE) $(MFLAG) -C $(LIB_DIR) clean
@@ -159,6 +142,6 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re bonus debug
+.PHONY: all bonus clean fclean re bonus
 
 -include $(DEPS)
