@@ -6,7 +6,7 @@
 /*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 13:23:12 by ygorget           #+#    #+#             */
-/*   Updated: 2025/03/26 12:31:58 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/03/26 15:00:56 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ typedef struct s_minimap
 	int y;
 	double	limit_x;
 	double	limit_y;
+	int count_i;
+	int count_j;
 }	t_minimap;
 
 typedef	struct	s_cube
