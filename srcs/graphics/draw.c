@@ -6,7 +6,7 @@
 /*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:55:45 by antauber          #+#    #+#             */
-/*   Updated: 2025/03/26 12:24:33 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/03/26 12:32:13 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	draw_background(t_cube *cube)
 	while (x < WIN_WIDTH)
 	{
 		y = 0;
-		while (y < WIN_HEIGHT / 2)
+		while (y < (WIN_HEIGHT >> 1 )+ cube->ray.offset && y < WIN_HEIGHT)
 			ft_put_pixel(&cube->mlx.render, x, y++, cube->map.ceiling);
 		while (y < WIN_HEIGHT)
 			ft_put_pixel(&cube->mlx.render, x, y++, cube->map.floor);
@@ -33,7 +33,7 @@ void	ft_put_pixel(t_img *img, int x, int y, int color)
 {
 	int	pixel;
 
-	pixel = y * img->line_len + x * img->bpp / 8;
+	pixel = y * img->line_len + ((x * img->bpp) >> 3);
 	img->addr[pixel] = color & 255;
 	img->addr[pixel + 1] = (color >> 8) & 255;
 	img->addr[pixel + 2] = (color >> 16) & 255;
@@ -47,7 +47,7 @@ static void	find_texture_pixel(t_text *text, t_ray *ray)
 	if (ray->side && ray->ray_dir_y < 0)
 		text->x = 64 - text->x - 1;
 	text->step = 1.0 * (double)64 / ray->line_height;
-	text->pos = (ray->draw_start - WIN_HEIGHT / 2 + ray->line_height / 2) * text->step;
+	text->pos = (ray->draw_start - ((WIN_HEIGHT >> 1) + ray->offset) + (ray->line_height >> 1)) * text->step;
 }
 
 static void	add_wall_texture(t_img *img, t_img *wall, t_ray *ray)
@@ -66,8 +66,10 @@ static void	add_wall_texture(t_img *img, t_img *wall, t_ray *ray)
 		{
 			text.y = (int)text.pos & 63;
 			text.pos += text.step;
-			text.pixl = text.y * wall->line_len + text.x * wall->bpp / 8;
+			text.pixl = text.y * wall->line_len + ((int)(text.x * wall->bpp) >> 3);
 			text.color = *(int *)(wall->addr + text.pixl);
+			if (ray->side == 1)
+				text.color = (text.color >> 1) & 8355711;
 			ft_put_pixel(img, ray->x, ray->draw_start, text.color);
 		}
 		ray->draw_start++;
@@ -77,10 +79,10 @@ static void	add_wall_texture(t_img *img, t_img *wall, t_ray *ray)
 void	draw_walls(t_ray *ray, t_mlx *mlx)
 {
 	ray->line_height = (int)(WIN_HEIGHT / ray->perp_wall_dist);
-	ray->draw_start = - ray->line_height / 2 + WIN_HEIGHT / 2;
+	ray->draw_start = - (ray->line_height >> 1) + ((WIN_HEIGHT >> 1) + ray->offset);
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;
-	ray->draw_end = (ray->line_height / 2) + (WIN_HEIGHT / 2);
+	ray->draw_end = (ray->line_height >> 1) + ((WIN_HEIGHT >> 1) + ray->offset);
 	if (ray->draw_end >= WIN_HEIGHT)
 		ray->draw_end = WIN_HEIGHT - 1;
 	if (ray->side == 0)

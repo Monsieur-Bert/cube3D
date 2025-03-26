@@ -6,11 +6,12 @@
 #    By: antauber <antauber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 08:19:19 by antauber          #+#    #+#              #
-#    Updated: 2025/03/24 16:10:07 by ygorget          ###   ########.fr        #
+#    Updated: 2025/03/25 16:15:08 by antauber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	cube3D
+DEBUG	=	decube3D
 
 ## ########################################################################## ##
 #   INGREDIENTS																  ##
@@ -58,7 +59,8 @@ MLX 		=	minilibx-linux/libmlx_Linux.a
 MFLAG		=	--no-print-directory
 SILENCE		=	--silent >/dev/null
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -g -MMD -MP -pg
+CFLAGS		=	-Wall -Wextra -Werror -MMD -MP -g
+DEBUGFLAGS	=	-g -pg
 
 RM			:=	rm -rf
 DIR_DUP		=	mkdir -p $(@D)
@@ -107,14 +109,29 @@ endef
 # fclean		remove .o && libft.a
 # re			fclean && default goal
 
-
 all: $(LIBFT) $(MLX) $(NAME)
 
-$(NAME): $(OBJS)
-	@printf "\n\n${BLUE}Linking objects into $(NAME)${RESET}\n"
-	@$(CC) $(CFLAGS) $^ -L$(LIB_DIR) -lft -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz -o $@
-	@echo "${GREEN}Binary $(NAME) successfully created${RESET}"
+## DEBUG RULES ############################################################## ##
+debug: CFLAGS += $(DEBUGFLAGS)
+debug: $(OBJS) $(LIBFT) $(MLX)
+	@printf "\n\n${RED}DEBUGING MAKE $(DEBUG)${RESET}\n"
+	@printf "\n\n${BLUE}Linking objects into $(DEBUG)${RESET}\n"
+	@$(CC) $(CFLAGS) $(DEBUGFLAGS) $^ -L$(LIB_DIR) -lft -L$(MLX_DIR)\
+	-lmlx -lXext -lX11 -lm -lz -o $@
+	@echo "${GREEN}Binary $(DEBUG) successfully created for debug${RESET}"
 
+$(BUILD_DIR)/%.o: $(SRCS_DIR)/%.c
+	@$(DIR_DUP)
+	$(PROGRESS_BAR)
+	@$(CC) $(CFLAGS) $(DEBUGFLAGS) -I$(INC) -I$(LIB_DIR) -I$(MLX_DIR) -o $@ -c $<
+## ########################################################################## ##
+
+
+$(NAME): $(OBJS)
+	@printf "\n\n${BLUE}Linking objects into debug${RESET}\n"
+	@$(CC) $(CFLAGS) $^ -L$(LIB_DIR) -lft -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz -o $@
+	@echo "${GREEN}Binary debug successfully created${RESET}"
+	
 $(MLX):
 	@printf "\n\n${BLUE}Linking objects into mlx.a${RESET}\n"
 	@$(MAKE) $(MFLAG) -C $(MLX_DIR) $(SILENCE)
@@ -126,7 +143,7 @@ $(LIBFT):
 $(BUILD_DIR)/%.o: $(SRCS_DIR)/%.c
 	@$(DIR_DUP)
 	$(PROGRESS_BAR)
-	@$(CC) $(CFLAGS) -I$(INC) -I$(LIB_DIR) -I$(MLX_DIR) -O3 -o $@ -c $<
+	@$(CC) $(CFLAGS) -I$(INC) -I$(LIB_DIR) -I$(MLX_DIR) -o $@ -c $<
 
 clean:
 	@$(MAKE) $(MFLAG) -C $(LIB_DIR) clean
@@ -137,12 +154,11 @@ clean:
 fclean: clean
 	@$(MAKE) $(MFLAG) -C $(LIB_DIR) fclean $(SILENCE)
 	@$(RM) $(MLX)
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) debug
 	@echo "${RED}Binary $(NAME) removed${RESET}"
-
 
 re: fclean all
 
-.PHONY: all bonus clean fclean re bonus
+.PHONY: all bonus clean fclean re bonus debug
 
 -include $(DEPS)
