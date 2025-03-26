@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 13:23:12 by ygorget           #+#    #+#             */
-/*   Updated: 2025/03/24 16:21:32 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/03/26 11:50:11 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,16 @@ typedef struct s_buff
 	struct s_buff	*next;
 }	t_buff;
 
+typedef struct s_minimap
+{
+	double i;
+	double j;
+	int x;
+	int y;
+	double	limit_x;
+	double	limit_y;
+}	t_minimap;
+
 typedef	struct	s_cube
 {
 	char	**tab;
@@ -76,7 +86,8 @@ enum e_minimap
 {
 	WALL = 0x000000,
 	FLOOR = 0xbfc9ca,
-	PLAYER = 0xffffff,
+	PLAYER = 0xFFFFFF,
+	VOID = 0x780015,
 };
 
 #endif
