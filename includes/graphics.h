@@ -6,7 +6,7 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:34:53 by antauber          #+#    #+#             */
-/*   Updated: 2025/03/25 15:58:59 by antauber         ###   ########.fr       */
+/*   Updated: 2025/03/26 11:23:09 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ enum	e_key_hooks
 	S_MV_BACK,
 	A_MV_LEFT,
 	D_MV_RIGHT,
+	LR_MV_BOOST,
 	L_RT_LEFT,
 	R_RT_RIGHT,
 	U_RT_UP,
