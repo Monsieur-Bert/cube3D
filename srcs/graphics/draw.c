@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:55:45 by antauber          #+#    #+#             */
-/*   Updated: 2025/03/26 12:32:13 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/03/26 16:35:11 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	draw_background(t_cube *cube)
 	x = 0;
 	while (x < WIN_WIDTH)
 	{
-		y = 0;
-		while (y < (WIN_HEIGHT >> 1 )+ cube->ray.offset && y < WIN_HEIGHT)
+		y = cube->ray.prev_start[x];
+		while (y < (WIN_HEIGHT >> 1 ) + cube->ray.offset && y <= WIN_HEIGHT)
 			ft_put_pixel(&cube->mlx.render, x, y++, cube->map.ceiling);
-		while (y < WIN_HEIGHT)
+		while (y < cube->ray.prev_end[x] && y <= WIN_HEIGHT)
 			ft_put_pixel(&cube->mlx.render, x, y++, cube->map.floor);
 		x++;
 	}
@@ -68,8 +68,6 @@ static void	add_wall_texture(t_img *img, t_img *wall, t_ray *ray)
 			text.pos += text.step;
 			text.pixl = text.y * wall->line_len + ((int)(text.x * wall->bpp) >> 3);
 			text.color = *(int *)(wall->addr + text.pixl);
-			if (ray->side == 1)
-				text.color = (text.color >> 1) & 8355711;
 			ft_put_pixel(img, ray->x, ray->draw_start, text.color);
 		}
 		ray->draw_start++;
@@ -84,8 +82,10 @@ void	draw_walls(t_ray *ray, t_mlx *mlx)
 		ray->draw_start = 0;
 	ray->draw_end = (ray->line_height >> 1) + ((WIN_HEIGHT >> 1) + ray->offset);
 	if (ray->draw_end >= WIN_HEIGHT)
-		ray->draw_end = WIN_HEIGHT - 1;
-	if (ray->side == 0)
+		ray->draw_end = WIN_HEIGHT;
+	ray->prev_start[ray->x] = ray->draw_start;
+	ray->prev_end[ray->x] = ray->draw_end;
+	if (!ray->side)
 	{
 		if (ray->ray_dir_x > 0)
 			add_wall_texture(&mlx->render, &mlx->wall_we, ray);

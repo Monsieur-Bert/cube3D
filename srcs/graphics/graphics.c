@@ -6,7 +6,7 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:25:41 by antauber          #+#    #+#             */
-/*   Updated: 2025/03/25 14:52:29 by antauber         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:31:44 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,12 +229,18 @@ void	graphics(t_cube *cube)
 	set_keystab(cube);
 	set_player_dir(&cube->ray, cube->map.pos.pos);
 	cube->ray.x = 0;
+	for (int i = 0; i < WIN_WIDTH; i++)
+	{
+		cube->ray.prev_start[i] = 0;
+		cube->ray.prev_end[i] = WIN_HEIGHT;
+	}
 	//########################################
+	
+	if (!get_walls_textures(&cube->mlx, &cube->map))
+		free_error(cube, ERR_MLX_TEXT);
 	mlx_loop_hook(cube->mlx.init, &render, cube);
 	mlx_hook(cube->mlx.win, DestroyNotify, StructureNotifyMask, close_window, cube);
 	mlx_hook(cube->mlx.win, KeyPress, KeyPressMask, key_press, cube);
 	mlx_hook(cube->mlx.win, KeyRelease, KeyReleaseMask, key_release, cube);
-	if (!get_walls_textures(&cube->mlx, &cube->map))
-		free_error(cube, ERR_MLX_TEXT);
 	mlx_loop(cube->mlx.init);
 }
