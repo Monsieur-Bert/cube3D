@@ -6,38 +6,38 @@
 /*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 16:08:11 by ygorget           #+#    #+#             */
-/*   Updated: 2025/03/26 16:59:20 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/01 16:50:38 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cube3D.h>
 
-static void	draw_tile(t_img *render, int *x, int y, int img, t_minimap *plan)
+static void	draw_tile(t_img *render, int img, t_minimap *plan)
 {
-	int count_x;
-	int count_y;
-	int tmp;
+	int	count_x;
+	int	count_y;
+	int	tmp;
 
-	tmp = y;
+	tmp = plan->y;
 	count_x = 0;
 	count_y = 0;
-	if (*x == 80 || y == 80)
+	if (plan->x == 80 || plan->y == 80)
 		return ;
 	while (count_x < plan->limit_x)
 	{
 		while (count_y < plan->limit_y)
 		{
-			ft_put_pixel(render, *x, y++, img);
-			if (y == 80)
-				break;
+			ft_put_pixel(render, plan->x, plan->y++, img);
+			if (plan->y == 80)
+				break ;
 			count_y++;
 		}
-		y = tmp;
+		plan->y = tmp;
 		count_y = 0;
 		count_x++;
-		(*x)++;
-		if (*x == 80)
-			break;
+		plan->x++;
+		if (plan->x == 80)
+			break ;
 	}
 }
 
@@ -50,20 +50,24 @@ static double	limit(double pos)
 
 void	draw_map_element(t_cube *cube, t_minimap *plan)
 {
-	if ((int)plan->i == (int)cube->ray.pos_y && (int)plan->j == (int)cube->ray.pos_x)
-		draw_tile(&cube->mlx.render, &plan->x, plan->y, PLAYER, plan);
-	else if ((int)plan->i >= ft_maplen(cube->map.map) || (int)plan->j >= (int)ft_strlen(cube->map.map[(int)plan->i]) || cube->map.map[(int)plan->i][(int)plan->j] == ' ')
-		draw_tile(&cube->mlx.render, &plan->x, plan->y, VOID, plan);
+	if ((int)plan->i == (int)cube->ray.pos_y
+		&& (int)plan->j == (int)cube->ray.pos_x)
+		draw_tile(&cube->mlx.render, PLAYER, plan);
+	else if ((int)plan->i >= ft_maplen(cube->map.map)
+		|| (int)plan->j >= (int)ft_strlen(cube->map.map[(int)plan->i])
+		|| cube->map.map[(int)plan->i][(int)plan->j] == ' ')
+		draw_tile(&cube->mlx.render, VOID, plan);
 	else if (cube->map.map[(int)plan->i][(int)plan->j] == '1')
-		draw_tile(&cube->mlx.render, &plan->x, plan->y, WALL, plan);
-	else if (cube->map.map[(int)plan->i][(int)plan->j] == '0' || is_character(cube->map.map[(int)plan->i][(int)plan->j]))
-		draw_tile(&cube->mlx.render, &plan->x, plan->y, FLOOR, plan);
+		draw_tile(&cube->mlx.render, WALL, plan);
+	else if (cube->map.map[(int)plan->i][(int)plan->j] == '0'
+		|| is_character(cube->map.map[(int)plan->i][(int)plan->j]))
+		draw_tile(&cube->mlx.render, FLOOR, plan);
 }
 
 void	draw_part_element(t_cube *cube, t_minimap *plan)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	if (plan->count_i == 1)
 		i = ceil(plan->i);
@@ -73,12 +77,13 @@ void	draw_part_element(t_cube *cube, t_minimap *plan)
 		j = ceil(plan->j);
 	else
 		j = floor(plan->j);
-	if (i >= ft_maplen(cube->map.map) || j >= (int)ft_strlen(cube->map.map[i]) || cube->map.map[i][j] == ' ')
-		draw_tile(&cube->mlx.render, &plan->x, plan->y, VOID, plan);
+	if (i >= ft_maplen(cube->map.map) || j >= (int)ft_strlen(cube->map.map[i])
+		|| cube->map.map[i][j] == ' ')
+		draw_tile(&cube->mlx.render, VOID, plan);
 	else if (cube->map.map[i][j] == '1')
-		draw_tile(&cube->mlx.render, &plan->x, plan->y, WALL, plan);
+		draw_tile(&cube->mlx.render, WALL, plan);
 	else if (cube->map.map[i][j] == '0' || is_character(cube->map.map[i][j]))
-		draw_tile(&cube->mlx.render, &plan->x, plan->y, FLOOR, plan);
+		draw_tile(&cube->mlx.render, FLOOR, plan);
 }
 
 static void	limit_xy(t_minimap *plan)
@@ -87,11 +92,33 @@ static void	limit_xy(t_minimap *plan)
 	plan->limit_y = 10 - ((plan->i - (int)plan->i) * 10);
 }
 
+int	newline_minimap(t_cube *cube, t_minimap *plan, double fmo_i, double tmp)
+{
+	plan->j -= (plan->j - tmp);
+	if (plan->i + fmo_i == cube->ray.pos_y + 4)
+	{
+		plan->count_i++;
+		plan->i += fmo_i;
+	}
+	else
+		plan->i += plan->limit_y * 0.1;
+	if (plan->i >= limit(cube->ray.pos_y))
+	{
+		plan->count_i--;
+		return (1);
+	}
+	plan->x = 0;
+	plan->y += plan->limit_y;
+	limit_xy(plan);
+	plan->count_j = 0;
+	return (0);
+}
+
 static void	mini(t_cube *cube, t_minimap *plan)
 {
-	double tmp;
-	double fmo_j;
-	double fmo_i;
+	double	tmp;
+	double	fmo_j;
+	double	fmo_i;
 
 	fmo_j = fmod(plan->j, 1.0);
 	fmo_i = fmod(plan->i, 1.0);
@@ -101,23 +128,8 @@ static void	mini(t_cube *cube, t_minimap *plan)
 		limit_xy(plan);
 		if (plan->j >= limit(cube->ray.pos_x))
 		{
-			plan->j -= (plan->j - tmp);
-			if (plan->i + fmo_i == cube->ray.pos_y + 4)
-			{
-				plan->count_i++;
-				plan->i += fmo_i;
-			}
-			else
-				plan->i += plan->limit_y * 0.1;
-			if (plan->i >= limit(cube->ray.pos_y))
-			{
-				plan->count_i--;
-				break;
-			}
-			plan->x = 0;
-			plan->y += plan->limit_y;
-			limit_xy(plan);
-			plan->count_j = 0;
+			if (newline_minimap(cube, plan, fmo_i, tmp) == 1)
+				break ;
 		}
 		if (plan->count_j == 1 || plan->count_i == 1)
 			draw_part_element(cube, plan);
@@ -133,52 +145,26 @@ static void	mini(t_cube *cube, t_minimap *plan)
 	}
 }
 
-// static void	draw_player(t_img *render, int x, int y, int img)
-// {
-// 	int count_x;
-// 	int count_y;
-// 	int tmp;
-
-// 	tmp = y;
-// 	count_x = 0;
-// 	count_y = 0;
-// 	while (count_x < 10)
-// 	{
-// 		while (count_y < 10)
-// 		{
-// 			ft_put_pixel(render, x, y++, img);
-// 			if (y == 80)
-// 				break;
-// 			count_y++;
-// 		}
-// 		y = tmp;
-// 		count_y = 0;
-// 		count_x++;
-// 		x++;
-// 	}
-// }
+void	init_plan(t_cube *cube, t_minimap *plan)
+{
+	if (cube->ray.pos_x - 4 > 0)
+		plan->j = cube->ray.pos_x - 4;
+	else
+		plan->j = 0;
+	if (cube->ray.pos_y - 4 >= 0)
+		plan->i = cube->ray.pos_y - 4;
+	else
+		plan->i = 0;
+	plan->x = 0;
+	plan->y = 0;
+	plan->count_j = 0;
+	plan->count_i = 0;
+}
 
 void	minimap(t_cube *cube)
 {
-	t_minimap plan;
-	//int x;
-	//int y;
-	
-	if (cube->ray.pos_x - 4 > 0)
-		plan.j = cube->ray.pos_x - 4;	
-	else
-		plan.j = 0;
-	if (cube->ray.pos_y - 4 >= 0)
-		plan.i = cube->ray.pos_y - 4;
-	else
-		plan.i = 0;
-	plan.x = 0;
-	plan.y = 0;
-	plan.count_j = 0;
-	plan.count_i = 0;
+	t_minimap	plan;
+
+	init_plan(cube, &plan);
 	mini(cube, &plan);
-	//printf("cube x = %f\ncub y = %f\n", cube->ray.pos_x, cube->ray.pos_y);
-	//x = (int)cube->ray.pos_x * 10;
-	//y = (int)cube->ray.pos_y * 10;
-	//draw_player(&cube->mlx.render, x, y, PLAYER);
 }
