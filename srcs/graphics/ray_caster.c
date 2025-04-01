@@ -6,7 +6,7 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:51:18 by antauber          #+#    #+#             */
-/*   Updated: 2025/03/19 08:31:24 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:13:51 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,8 @@ static void	init_ray(t_ray *ray)
 		ray->delta_dist_y = fabs(1 / ray->ray_dir_y);
 }
 
-void	set_player_dir(t_ray *ray, char dir)
+static void	set_player_dir(t_ray *ray, char dir)
 {
-	ray->dir_x = 0;
-	ray->dir_y = 0;
-	ray->plane_x = 0;
-	ray->plane_y = 0;
 	if (dir == 'N')
 	{
 		ray->dir_y = -1;
@@ -55,6 +51,28 @@ void	set_player_dir(t_ray *ray, char dir)
 		ray->dir_x = 1;
 		ray->plane_y = 0.66;
 	}
+}
+
+void	set_player(t_ray *ray, t_map *map)
+{
+	int	i;
+
+	ray->dir_x = 0;
+	ray->dir_y = 0;
+	ray->plane_x = 0;
+	ray->plane_y = 0;
+	ray->offset = 0;
+	ray->pos_x = map->pos.x + 0.5;
+	ray->pos_y = map->pos.y + 0.5;
+	ray->x = 0;
+	i = 0;
+	while (i < WIN_WIDTH)
+	{
+		ray->prev_start[i] = 0;
+		ray->prev_end[i] = WIN_HEIGHT;
+		i++;
+	}
+	set_player_dir(ray, map->pos.pos);
 }
 
 void	raycaster(t_cube *cube)

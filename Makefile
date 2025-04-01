@@ -6,12 +6,11 @@
 #    By: antauber <antauber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 08:19:19 by antauber          #+#    #+#              #
-#    Updated: 2025/03/26 16:23:45 by antauber         ###   ########.fr        #
+#    Updated: 2025/04/01 16:06:18 by antauber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	cube3D
-DEBUG	=	decube3D
 
 ## ########################################################################## ##
 #   INGREDIENTS																  ##
@@ -29,13 +28,15 @@ INC			:=	includes
 
 SRCS_DIR	:=	srcs
 SRCS		:=	cube3D.c\
-				graphics/ray_caster.c	graphics/dda_algo.c\
-				graphics/draw.c			graphics/graphics.c\
-				graphics/hooks.c		graphics/minimap.c\
-				parsing/init.c			parsing/create_tab.c\
-				parsing/read_fd.c		parsing/read_fd_utils.c\
-				parsing/maps.c			parsing/maps_utils.c\
-				parsing/texture.c		parsing/texture_utils.c
+				graphics/init_mlx.c			graphics/close_mlx.c\
+				graphics/ray_caster.c		graphics/dda_algo.c\
+				graphics/draw.c				graphics/graphics.c\
+				graphics/handle_hooks.c		graphics/minimap.c\
+				graphics/move_player.c\
+				parsing/init.c				parsing/create_tab.c\
+				parsing/read_fd.c			parsing/read_fd_utils.c\
+				parsing/maps.c				parsing/maps_utils.c\
+				parsing/texture.c			parsing/texture_utils.c
 SRCS		:=	$(SRCS:%=$(SRCS_DIR)/%)
 
 BUILD_DIR	:=	.build
@@ -113,7 +114,7 @@ all: $(LIBFT) $(MLX) $(NAME)
 $(NAME): $(OBJS)
 	@printf "\n\n${BLUE}Linking objects into debug${RESET}\n"
 	@$(CC) $(CFLAGS) $^ -L$(LIB_DIR) -lft -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz -o $@
-	@echo "${GREEN}Binary debug successfully created${RESET}"
+	@echo "${GREEN}Binary $(NAME) successfully created${RESET}"
 	
 $(MLX):
 	@printf "\n\n${BLUE}Linking objects into mlx.a${RESET}\n"
@@ -137,7 +138,7 @@ clean:
 fclean: clean
 	@$(MAKE) $(MFLAG) -C $(LIB_DIR) fclean $(SILENCE)
 	@$(RM) $(MLX)
-	@$(RM) $(NAME) debug
+	@$(RM) $(NAME)
 	@echo "${RED}Binary $(NAME) removed${RESET}"
 
 re: fclean all

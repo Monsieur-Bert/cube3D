@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:40:24 by ygorget           #+#    #+#             */
-/*   Updated: 2025/03/13 14:40:16 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/01 15:58:59 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cube3D.h>
 
-int	good_texture(t_texture *img)
+static int	good_texture(t_texture *img)
 {
 	if (check_space(img->no) == 1)
 		return (1);
@@ -29,7 +29,7 @@ int	good_texture(t_texture *img)
 	return (0);
 }
 
-char	*identidier(char *str, char *to_find)
+static char	*identidier(char *str, char *to_find)
 {
 	int	i;
 	int	com;
@@ -51,7 +51,7 @@ char	*identidier(char *str, char *to_find)
 	return (0);
 }
 
-char	*add_texture(char *str, char *text)
+static char	*add_texture(char *str, char *text)
 {
 	int	i;
 

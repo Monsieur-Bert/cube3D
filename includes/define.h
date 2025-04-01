@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   define.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 13:21:55 by ygorget           #+#    #+#             */
-/*   Updated: 2025/03/24 10:37:10 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/01 16:08:44 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINE_H
-#define DEFINE_H
+# define DEFINE_H
 
 # define ERR_MALLOC		"memory allocation failed\n"
 # define ERR_WALL		"the map is not surrounded by a wall\n"
@@ -30,4 +30,5 @@
 # define ERR_MLX_WIN	"mlx create window error\n"
 # define ERR_MLX_RENDER	"mlx create image error\n"
 # define ERR_MLX_TEXT	"mlx create wall texture error\n"
+
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:45:14 by ygorget           #+#    #+#             */
-/*   Updated: 2025/03/25 11:16:34 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/01 15:54:22 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_texture(t_texture *img)
 	img->c = NULL;
 }
 
-int	no_space(char *rgb)
+static int	no_space(char *rgb)
 {
 	int	i;
 
@@ -41,7 +41,7 @@ int	no_space(char *rgb)
 	return (0);
 }
 
-int	rgb(int *parsed_color, char *str)
+static int	rgb(int *parsed_color, char *str)
 {
 	char	**rgb;
 	t_color	color;
@@ -70,7 +70,7 @@ int	rgb(int *parsed_color, char *str)
 	return (0);
 }
 
-void	pos_character(t_map *map)
+static void	pos_character(t_map *map)
 {
 	int	i;
 	int	j;

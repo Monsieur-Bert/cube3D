@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   maps.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:41:35 by ygorget           #+#    #+#             */
-/*   Updated: 2025/03/13 14:40:06 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/01 16:04:22 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ bool	is_character(char c)
 	return (false);
 }
 
-bool	wall_or_floor(char c)
+static bool	wall_or_floor(char c)
 {
 	if (c == '0' || c == '1')
 		return (true);
 	return (false);
 }
 
-int	check_around(char **tab, int i, int j)
+static int	check_around(char **tab, int i, int j)
 {
 	if (j == 0 || i + 1 == ft_maplen(tab))
 		return (1);
@@ -47,7 +47,7 @@ int	check_around(char **tab, int i, int j)
 	return (0);
 }
 
-int	good_items(char **tab, int i, int j, int *p)
+static int	good_items(char **tab, int i, int j, int *p)
 {
 	if (is_character(tab[i][j]))
 		(*p)++;

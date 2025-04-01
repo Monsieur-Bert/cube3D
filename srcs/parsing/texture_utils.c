@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   texture_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:54:09 by ygorget           #+#    #+#             */
-/*   Updated: 2025/03/13 14:40:13 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/01 15:59:51 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cube3D.h>
 
-int	start_color(char *color, char *str)
+static int	start_color(char *color, char *str)
 {
 	if (!color)
 	{

@@ -6,7 +6,7 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:34:53 by antauber          #+#    #+#             */
-/*   Updated: 2025/03/26 16:36:55 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:07:45 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 
 # define WIN_WIDTH	920
 # define WIN_HEIGHT	480
-# define MOVE_SPEED	8.5
-# define ROT_SPEED	1.5
+# define MOVE_SPEED	5.5
+# define ROT_SPEED	2.5
+# define MOUSE_SENSI 0.5
 
-typedef	struct s_ray
+typedef struct s_ray
 {
 	int		x;
 	double	pos_x;
@@ -50,7 +51,7 @@ typedef	struct s_ray
 	double	wall_x;
 }	t_ray;
 
-typedef	struct s_text
+typedef struct s_text
 {
 	double	x;
 	int		y;
@@ -59,7 +60,6 @@ typedef	struct s_text
 	int		pixl;
 	int		color;
 }	t_text;
-
 
 typedef struct s_img
 {
@@ -77,6 +77,8 @@ typedef struct s_mlx
 	void	*init;
 	void	*win;
 	int		*keys;
+	int		half_width;
+	int		half_height;
 	t_img	render;
 	t_img	wall_no;
 	t_img	wall_so;
@@ -96,6 +98,8 @@ enum	e_key_hooks
 	R_RT_RIGHT,
 	U_RT_UP,
 	D_RT_DOWN,
+	MAP,
+	MOUSE,
 	Q_QUIT,
 };
 

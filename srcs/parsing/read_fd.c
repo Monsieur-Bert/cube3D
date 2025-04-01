@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   read_fd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:42:47 by ygorget           #+#    #+#             */
-/*   Updated: 2025/03/13 14:40:11 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/01 16:01:04 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cube3D.h>
 
-void	ft_strcpy(char *dest, char *src)
+static void	ft_strcpy(char *dest, char *src)
 {
 	int	i;
 
@@ -25,7 +25,7 @@ void	ft_strcpy(char *dest, char *src)
 	dest[i] = '\0';
 }
 
-char	*new_string(t_buff *node, int count)
+static char	*new_string(t_buff *node, int count)
 {
 	char	*str;
 	int		len;

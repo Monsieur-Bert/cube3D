@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_tab.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:43:30 by ygorget           #+#    #+#             */
-/*   Updated: 2025/03/13 14:40:01 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/01 15:56:48 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*ft_strstr(const char *big, const char *little, size_t len)
 	return (0);
 }
 
-void	skip_element(char *str, int *i)
+static void	skip_element(char *str, int *i)
 {
 	int	info;
 
@@ -58,7 +58,7 @@ void	skip_element(char *str, int *i)
 	}
 }
 
-int	backslash(char *str)
+static int	backslash(char *str)
 {
 	int	i;
 

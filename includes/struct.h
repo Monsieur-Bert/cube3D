@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 13:23:12 by ygorget           #+#    #+#             */
-/*   Updated: 2025/03/26 15:00:56 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/01 16:09:42 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
-#define STRUCT_H
+# define STRUCT_H
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 247
@@ -66,17 +66,17 @@ typedef struct s_buff
 
 typedef struct s_minimap
 {
-	double i;
-	double j;
-	int x;
-	int y;
+	double	i;
+	double	j;
+	int		x;
+	int		y;
 	double	limit_x;
 	double	limit_y;
-	int count_i;
-	int count_j;
+	int		count_i;
+	int		count_j;
 }	t_minimap;
 
-typedef	struct	s_cube
+typedef struct s_cube
 {
 	char	**tab;
 	t_mlx	mlx;

@@ -6,7 +6,7 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:55:45 by antauber          #+#    #+#             */
-/*   Updated: 2025/03/26 16:35:11 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/01 16:14:33 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	draw_background(t_cube *cube)
 	while (x < WIN_WIDTH)
 	{
 		y = cube->ray.prev_start[x];
-		while (y < (WIN_HEIGHT >> 1 ) + cube->ray.offset && y <= WIN_HEIGHT)
+		while (y < (cube->mlx.half_height) + cube->ray.offset && y <= WIN_HEIGHT)
 			ft_put_pixel(&cube->mlx.render, x, y++, cube->map.ceiling);
 		while (y < cube->ray.prev_end[x] && y <= WIN_HEIGHT)
 			ft_put_pixel(&cube->mlx.render, x, y++, cube->map.floor);
@@ -47,7 +47,8 @@ static void	find_texture_pixel(t_text *text, t_ray *ray)
 	if (ray->side && ray->ray_dir_y < 0)
 		text->x = 64 - text->x - 1;
 	text->step = 1.0 * (double)64 / ray->line_height;
-	text->pos = (ray->draw_start - ((WIN_HEIGHT >> 1) + ray->offset) + (ray->line_height >> 1)) * text->step;
+	text->pos = (ray->draw_start - ((WIN_HEIGHT >> 1) + ray->offset)
+			+ (ray->line_height >> 1)) * text->step;
 }
 
 static void	add_wall_texture(t_img *img, t_img *wall, t_ray *ray)
@@ -66,7 +67,8 @@ static void	add_wall_texture(t_img *img, t_img *wall, t_ray *ray)
 		{
 			text.y = (int)text.pos & 63;
 			text.pos += text.step;
-			text.pixl = text.y * wall->line_len + ((int)(text.x * wall->bpp) >> 3);
+			text.pixl = text.y * wall->line_len
+				+ ((int)(text.x * wall->bpp) >> 3);
 			text.color = *(int *)(wall->addr + text.pixl);
 			ft_put_pixel(img, ray->x, ray->draw_start, text.color);
 		}
@@ -77,10 +79,10 @@ static void	add_wall_texture(t_img *img, t_img *wall, t_ray *ray)
 void	draw_walls(t_ray *ray, t_mlx *mlx)
 {
 	ray->line_height = (int)(WIN_HEIGHT / ray->perp_wall_dist);
-	ray->draw_start = - (ray->line_height >> 1) + ((WIN_HEIGHT >> 1) + ray->offset);
+	ray->draw_start = - (ray->line_height >> 1) + (mlx->half_height + ray->offset);
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;
-	ray->draw_end = (ray->line_height >> 1) + ((WIN_HEIGHT >> 1) + ray->offset);
+	ray->draw_end = (ray->line_height >> 1) + (mlx->half_height + ray->offset);
 	if (ray->draw_end >= WIN_HEIGHT)
 		ray->draw_end = WIN_HEIGHT;
 	ray->prev_start[ray->x] = ray->draw_start;
