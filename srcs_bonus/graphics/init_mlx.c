@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:30:58 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/01 16:16:01 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/02 13:47:33 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ bool	get_walls_addr(t_mlx *mlx)
 			&mlx->wall_ea.line_len, &mlx->wall_ea.endian);
 	if (!mlx->wall_no.addr)
 		return (false);
+	mlx->door.addr = mlx_get_data_addr(mlx->door.img, &mlx->door.bpp,
+		&mlx->door.line_len, &mlx->door.endian);
+	if (!mlx->door.addr)
+		return (false);
 	return (true);
 }
 
@@ -50,6 +54,10 @@ bool	get_walls_textures(t_mlx *mlx, t_map *map)
 	mlx->wall_ea.img = mlx_xpm_file_to_image(mlx->init, map->img.ea,
 			&mlx->wall_ea.width, &mlx->wall_ea.height);
 	if (!mlx->wall_ea.img)
+		return (false);
+	mlx->door.img = mlx_xpm_file_to_image(mlx->init, "Xpm/gold.xpm",
+		&mlx->door.width, &mlx->door.height);
+	if (!mlx->door.img)
 		return (false);
 	if (!get_walls_addr(mlx))
 		return (false);
@@ -72,6 +80,7 @@ void	init_mlx(t_mlx *mlx)
 	init_img(&mlx->wall_so);
 	init_img(&mlx->wall_we);
 	init_img(&mlx->wall_ea);
+	init_img(&mlx->door);
 	mlx->init = NULL;
 	mlx->win = NULL;
 	mlx->keys = NULL;

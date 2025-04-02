@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   close_mlx.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:33:10 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/01 16:16:08 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/02 13:47:18 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,12 @@ static void	free_walls_textures(t_mlx *mlx)
 		mlx->wall_ea.img = NULL;
 		mlx->wall_ea.addr = NULL;
 	}
+	if (mlx->door.img != NULL)
+	{
+		mlx_destroy_image(mlx->init, mlx->door.img);
+		mlx->door.img = NULL;
+		mlx->door.addr = NULL;
+	}
 }
 
 static void	free_mlx(t_mlx *mlx)
@@ -68,6 +74,7 @@ int	close_window(t_cube *cube)
 	if (cube->mlx.win != NULL)
 		free_mlx(&cube->mlx);
 	ft_free_tabstr(cube->tab);
+	lst_clear(&cube->door);
 	exit (0);
 }
 
@@ -75,6 +82,7 @@ void	free_error(t_cube *cube, char *error_message)
 {
 	free_mlx(&cube->mlx);
 	ft_free_tabstr(cube->tab);
+	lst_clear(&cube->door);
 	print_error(error_message);
 	exit (1);
 }

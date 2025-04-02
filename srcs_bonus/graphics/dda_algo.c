@@ -3,17 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   dda_algo.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:55:08 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/01 16:15:27 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/02 16:07:34 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cube3D.h>
 
-void	perform_dda(t_ray *ray, char **map)
+bool	door_close(t_door **door, int y, int x)
 {
+	t_door *tmp;
+
+	if (!door)
+		return (false);
+	tmp = *door;
+	while (tmp)
+	{
+		if (tmp->x == x && tmp->y == y && tmp->open == false)
+			return (true);
+		tmp = tmp->next;
+	}
+	return (false);
+}
+
+void	perform_dda(t_ray *ray, char **map, t_door *door)
+{
+	(void)door;
 	while (ray->hit == false)
 	{
 		if (ray->side_dist_x < ray->side_dist_y)
@@ -28,7 +45,7 @@ void	perform_dda(t_ray *ray, char **map)
 			ray->map_y += ray->step_y;
 			ray->side = true;
 		}
-		if (map[ray->map_y][ray->map_x] == '1')
+		if (map[ray->map_y][ray->map_x] == '1' || (map[ray->map_y][ray->map_x] == 'D' && door_close(&door, ray->map_y, ray->map_x)))
 			ray->hit = true;
 	}
 	if (!ray->side)

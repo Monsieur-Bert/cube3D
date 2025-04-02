@@ -6,7 +6,7 @@
 #    By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 08:19:19 by antauber          #+#    #+#              #
-#    Updated: 2025/04/02 11:38:39 by ygorget          ###   ########.fr        #
+#    Updated: 2025/04/02 13:03:28 by ygorget          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,9 @@ SRCS_B		:=	cube3D.c\
 				parsing/init.c				parsing/create_tab.c\
 				parsing/read_fd.c			parsing/read_fd_utils.c\
 				parsing/maps.c				parsing/maps_utils.c\
-				parsing/texture.c			parsing/texture_utils.c
+				parsing/texture.c			parsing/texture_utils.c\
+				parsing/door.c
+
 SRCS_B		:=	$(SRCS_B:%=$(SRCS_B_DIR)/%)
 
 BUILD_DIR	:=	.build

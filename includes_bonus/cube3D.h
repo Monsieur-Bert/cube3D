@@ -6,7 +6,7 @@
 /*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:19:57 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/02 11:19:06 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/02 16:29:12 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,12 @@ int		ft_maplen(char **tab);
 bool	is_character(char c);
 int		maps(char **tab, int p);
 
+//door
+void	lst_clear(t_door **lst);
+t_door	*lstnew(void);
+void	addback(t_door **node, t_door *new);
+t_door	*door(char **map);
+
 /* ************************************************************************** */
 /*                                  GRAPHICS                                  */
 /* ************************************************************************** */
@@ -89,7 +95,8 @@ int		key_press(int keysym, t_cube *cube);
 void	set_keystab(t_cube *cube);
 
 //dda_algo
-void	perform_dda(t_ray *ray, char **map);
+bool	door_close(t_door **door, int y, int x);
+void	perform_dda(t_ray *ray, char **map, t_door *door);
 void	find_step_dda(t_ray *ray);
 
 //raycaster
@@ -99,7 +106,7 @@ void	set_player(t_ray *ray, t_map *map);
 //draw
 void	draw_background(t_cube *cube);
 void	ft_put_pixel(t_img *img, int x, int y, int color);
-void	draw_walls(t_ray *ray, t_mlx *mlx);
+void	draw_walls(t_cube *cube, t_ray *ray, t_mlx *mlx);
 
 //move_player
 void	rotate_player(t_ray *ray, int dir, double speed);

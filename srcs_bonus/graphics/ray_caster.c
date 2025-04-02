@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_caster.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:51:18 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/01 16:13:51 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/02 16:26:45 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ void	raycaster(t_cube *cube)
 	{
 		init_ray(&cube->ray);
 		find_step_dda(&cube->ray);
-		perform_dda(&cube->ray, cube->map.map);
-		draw_walls(&cube->ray, &cube->mlx);
+		perform_dda(&cube->ray, cube->map.map, cube->door);
+		draw_walls(cube, &cube->ray, &cube->mlx);
 		cube->ray.x++;
 	}
 }

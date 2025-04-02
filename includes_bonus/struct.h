@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 13:23:12 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/01 16:09:42 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/02 12:45:50 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,21 @@ typedef struct s_minimap
 	int		count_j;
 }	t_minimap;
 
+typedef struct s_door
+{
+	bool			open;
+	int				x;
+	int				y;	
+	struct s_door	*next;
+}	t_door;
+
 typedef struct s_cube
 {
 	char	**tab;
 	t_mlx	mlx;
 	t_map	map;
 	t_ray	ray;
+	t_door	*door;
 }	t_cube;
 
 enum e_minimap

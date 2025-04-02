@@ -6,7 +6,7 @@
 /*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:20:55 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/02 11:51:07 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/02 15:49:45 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,29 @@
 
 static void	move_forward_backward(t_cube *cube, int dir, double speed)
 {
-	if (cube->map.map[(int)(cube->ray.pos_y)]
-		[(int)(cube->ray.pos_x + cube->ray.dir_x * speed * dir)] != '1')
+	if ((cube->map.map[(int)(cube->ray.pos_y)][(int)(cube->ray.pos_x + cube->ray.dir_x * speed * dir)] != '1'
+		&& cube->map.map[(int)(cube->ray.pos_y)][(int)(cube->ray.pos_x + cube->ray.dir_x * speed * dir)] != 'D')
+		|| (cube->map.map[(int)(cube->ray.pos_y)][(int)(cube->ray.pos_x + cube->ray.dir_x * speed * dir)] == 'D'
+		&& !door_close(&cube->door, (int)(cube->ray.pos_y), (int)(cube->ray.pos_x + cube->ray.dir_x * speed * dir))))
 		cube->ray.pos_x += cube->ray.dir_x * speed * dir;
-	if (cube->map.map[(int)(cube->ray.pos_y + cube->ray.dir_y * speed * dir)]
-		[(int)(cube->ray.pos_x)] != '1')
+	if ((cube->map.map[(int)(cube->ray.pos_y + cube->ray.dir_y * speed * dir)][(int)(cube->ray.pos_x)] != '1'
+		&& cube->map.map[(int)(cube->ray.pos_y + cube->ray.dir_y * speed * dir)][(int)(cube->ray.pos_x)] != 'D')
+		|| (cube->map.map[(int)(cube->ray.pos_y + cube->ray.dir_y * speed * dir)][(int)(cube->ray.pos_x)] == 'D'
+		&& !door_close(&cube->door, (int)(cube->ray.pos_y + cube->ray.dir_y * speed * dir), (int)(cube->ray.pos_x))))
 		cube->ray.pos_y += cube->ray.dir_y * speed * dir;
 }
 
 static void	move_right_left(t_cube *cube, int dir, double speed)
 {
-	if (cube->map.map[(int)(cube->ray.pos_y)]
-		[(int)(cube->ray.pos_x - cube->ray.dir_y * speed * dir)] != '1')
+	if ((cube->map.map[(int)(cube->ray.pos_y)][(int)(cube->ray.pos_x - cube->ray.dir_y * speed * dir)] != '1'
+		&& cube->map.map[(int)(cube->ray.pos_y)][(int)(cube->ray.pos_x - cube->ray.dir_y * speed * dir)] != 'D')
+		|| (cube->map.map[(int)(cube->ray.pos_y)][(int)(cube->ray.pos_x - cube->ray.dir_y * speed * dir)] == 'D'
+		&& !door_close(&cube->door, (int)(cube->ray.pos_y), (int)(cube->ray.pos_x - cube->ray.dir_x * speed * dir))))
 		cube->ray.pos_x -= cube->ray.dir_y * speed * dir;
-	if (cube->map.map[(int)(cube->ray.pos_y + cube->ray.dir_x * speed * dir)]
-		[(int)(cube->ray.pos_x)] != '1')
+	if ((cube->map.map[(int)(cube->ray.pos_y + cube->ray.dir_x * speed * dir)][(int)(cube->ray.pos_x)] != '1'
+		&& cube->map.map[(int)(cube->ray.pos_y + cube->ray.dir_x * speed * dir)][(int)(cube->ray.pos_x)] != 'D')
+		|| (cube->map.map[(int)(cube->ray.pos_y + cube->ray.dir_x * speed * dir)][(int)(cube->ray.pos_x)] == 'D'
+		&& !door_close(&cube->door, (int)(cube->ray.pos_y + cube->ray.dir_y * speed * dir), (int)(cube->ray.pos_x))))
 		cube->ray.pos_y += cube->ray.dir_x * speed * dir;
 }
 
