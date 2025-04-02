@@ -6,12 +6,13 @@
 #    By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 08:19:19 by antauber          #+#    #+#              #
-#    Updated: 2025/04/02 11:10:05 by ygorget          ###   ########.fr        #
+#    Updated: 2025/04/02 11:38:39 by ygorget          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	cube3D
-
+NAME	=	cub3D
+BONUS	=	cub3B
+	
 ## ########################################################################## ##
 #   INGREDIENTS																  ##
 ## ########################################################################## ##
@@ -25,6 +26,7 @@ NAME	=	cube3D
 # DEPS			dependencies files
 
 INC			:=	includes
+INC_B		:=	includes_bonus
 
 SRCS_DIR	:=	srcs
 SRCS		:=	cube3D.c\
@@ -39,9 +41,25 @@ SRCS		:=	cube3D.c\
 				parsing/texture.c			parsing/texture_utils.c
 SRCS		:=	$(SRCS:%=$(SRCS_DIR)/%)
 
+SRCS_B_DIR	:=	srcs_bonus
+SRCS_B		:=	cube3D.c\
+				graphics/init_mlx.c			graphics/close_mlx.c\
+				graphics/ray_caster.c		graphics/dda_algo.c\
+				graphics/draw.c				graphics/graphics.c\
+				graphics/handle_hooks.c		graphics/minimap.c\
+				graphics/move_player.c		graphics/minimap_utils.c\
+				parsing/init.c				parsing/create_tab.c\
+				parsing/read_fd.c			parsing/read_fd_utils.c\
+				parsing/maps.c				parsing/maps_utils.c\
+				parsing/texture.c			parsing/texture_utils.c
+SRCS_B		:=	$(SRCS_B:%=$(SRCS_B_DIR)/%)
+
 BUILD_DIR	:=	.build
+BUILD_DIR_B	:=	.build_bonus
 OBJS		:=	$(SRCS:$(SRCS_DIR)/%.c=$(BUILD_DIR)/%.o)
 DEPS		:=	$(SRCS:$(SRCS_DIR)/%.c=$(BUILD_DIR)/%.d)
+OBJS_B        :=    $(SRCS_B:$(SRCS_B_DIR)/%.c=$(BUILD_DIR_B)/%.o)
+DEPS_B        :=    $(SRCS_B:$(SRCS_B_DIR)/%.c=$(BUILD_DIR_B)/%.d)
 
 LIB_DIR		=	libft
 LIBFT		=	libft/libft.a
@@ -82,6 +100,7 @@ RESET		:=	\033[0m
 ## ########################################################################## ##
 
 TOTAL_FILES		:=	$(words $(OBJS))
+TOTAL_FILES_B	:=	$(words $(OBJS_B))
 CURR_FILE		:=	0
 BAR_LENGTH		:=	50
 NAME_LENGTH		:=	50
@@ -99,6 +118,19 @@ define PROGRESS_BAR
 	@printf "$(PREV_LINE)\r"
 endef
 
+define PROGRESS_BAR_BONUS
+    @$(eval CURR_FILE=$(shell echo $$(($(CURR_FILE) + 1))))
+    @$(eval PERCENTAGE=$(shell echo $$(($(CURR_FILE) * 100 / $(TOTAL_FILES_B)))))
+    @$(eval FILLED=$(shell echo $$(($(CURR_FILE) * $(BAR_LENGTH) / $(TOTAL_FILES_B)))))
+    @printf "\rCompiling [%d/%d] %-$(NAME_LENGTH)s" $(CURR_FILE) $(TOTAL_FILES_B) "$(notdir $<)"
+    @printf "\n"
+    @printf "\r"
+    @for i in `seq 1 $(FILLED)`; do printf "█"; done
+    @for i in `seq 1 $$(($(BAR_LENGTH) - $(FILLED)))`; do printf "░"; done
+    @printf " %3d%%" $(PERCENTAGE)
+    @printf "$(PREV_LINE)\r"
+endef
+
 ## ########################################################################## ##
 #   RECIPES																	  ##
 ## ########################################################################## ##
@@ -111,7 +143,14 @@ endef
 
 all: $(LIBFT) $(MLX) $(NAME)
 
+bonus: $(LIBFT) $(MLX) $(BONUS)
+
 $(NAME): $(OBJS)
+	@printf "\n\n${BLUE}Linking objects into debug${RESET}\n"
+	@$(CC) $(CFLAGS) $^ -L$(LIB_DIR) -lft -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz -o $@
+	@echo "${GREEN}Binary $(NAME) successfully created${RESET}"
+	
+$(BONUS): $(OBJS_B)
 	@printf "\n\n${BLUE}Linking objects into debug${RESET}\n"
 	@$(CC) $(CFLAGS) $^ -L$(LIB_DIR) -lft -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz -o $@
 	@echo "${GREEN}Binary $(NAME) successfully created${RESET}"
@@ -129,16 +168,21 @@ $(BUILD_DIR)/%.o: $(SRCS_DIR)/%.c
 	$(PROGRESS_BAR)
 	@$(CC) $(CFLAGS) -I$(INC) -I$(LIB_DIR) -I$(MLX_DIR) -O3 -Ofast -o $@ -c $<
 
+$(BUILD_DIR_B)/%.o: $(SRCS_B_DIR)/%.c
+	@$(DIR_DUP)
+	$(PROGRESS_BAR_BONUS)
+	@$(CC) $(CFLAGS) -I$(INC_B) -I$(LIB_DIR) -I$(MLX_DIR) -O3 -o $@ -c $<
+	
 clean:
 	@$(MAKE) $(MFLAG) -C $(LIB_DIR) clean
 	@$(MAKE) $(MFLAG) -C $(MLX_DIR) clean $(SILENCE)
-	@$(RM) $(BUILD_DIR)
+	@$(RM) $(BUILD_DIR) $(BUILD_DIR_B)
 	@echo "${RED}Build directory removed$(RESET)"
 
 fclean: clean
 	@$(MAKE) $(MFLAG) -C $(LIB_DIR) fclean $(SILENCE)
 	@$(RM) $(MLX)
-	@$(RM) $(NAME)
+	@$(RM) $(NAME) $(BONUS) 
 	@echo "${RED}Binary $(NAME) removed${RESET}"
 
 re: fclean all
