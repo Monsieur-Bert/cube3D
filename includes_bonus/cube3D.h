@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3D.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:19:57 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/02 11:19:06 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/02 15:06:31 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int		maps(char **tab, int p);
 void	graphics(t_cube *cube);
 
 //init_mlx.c
+bool	get_sprites_textures(t_mlx *mlx);
 bool	get_walls_addr(t_mlx *mlx);
 bool	get_walls_textures(t_mlx *mlx, t_map *map);
 void	init_mlx(t_mlx *mlx);
@@ -116,4 +117,9 @@ void	new_element(t_cube *cube, t_minimap *plan, double fmo_j);
 int		newline_minimap(t_cube *cube, t_minimap *plan,
 			double fmo_i, double tmp);
 
+
+t_spt	*sprites_lst(t_mlx *mlx, char **map);
+
+
+			
 #endif

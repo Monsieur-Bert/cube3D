@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+         #
+#    By: antauber <antauber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 08:19:19 by antauber          #+#    #+#              #
-#    Updated: 2025/04/02 11:38:39 by ygorget          ###   ########.fr        #
+#    Updated: 2025/04/02 15:40:06 by antauber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRCS_B		:=	cube3D.c\
 				graphics/draw.c				graphics/graphics.c\
 				graphics/handle_hooks.c		graphics/minimap.c\
 				graphics/move_player.c		graphics/minimap_utils.c\
+				graphics/sprites_utils.c\
 				parsing/init.c				parsing/create_tab.c\
 				parsing/read_fd.c			parsing/read_fd_utils.c\
 				parsing/maps.c				parsing/maps_utils.c\
@@ -78,7 +79,7 @@ MLX 		=	minilibx-linux/libmlx_Linux.a
 MFLAG		=	--no-print-directory
 SILENCE		=	--silent >/dev/null
 CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror -MMD -MP
+CFLAGS		=	-Wall -Wextra -Werror -MMD -MP -g
 
 RM			:=	rm -rf
 DIR_DUP		=	mkdir -p $(@D)

@@ -6,7 +6,7 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 13:23:12 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/01 16:09:42 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/02 14:16:27 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,10 @@ typedef struct s_minimap
 
 typedef struct s_cube
 {
-	char	**tab;
-	t_mlx	mlx;
-	t_map	map;
-	t_ray	ray;
+	char		**tab;
+	t_mlx		mlx;
+	t_map		map;
+	t_ray		ray;
 }	t_cube;
 
 enum e_minimap

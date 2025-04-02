@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:25:41 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/02 11:05:34 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/02 15:40:55 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,24 @@ static double	get_time_in_seconds(void)
 	return ((double)tv.tv_sec + (double)tv.tv_usec / 1000000.0);
 }
 
+
+void	init_sprites(t_cube *cube)
+{
+	t_spt	*curr;
+
+	curr = cube->mlx.sprites;
+	while (curr)
+	{
+		curr->dist = (cube->ray.pos_x - curr->x) * (cube->ray.pos_x - curr->x)
+			- (cube->ray.pos_y - curr->y) * (cube->ray.pos_y - curr->y);
+		curr = curr->next;
+	}
+	curr = cube->mlx.sprites;
+	//sort sprites in order
+}
+
+
+
 int	render(t_cube *cube)
 {
 	static double	last_time = 0;
@@ -54,6 +72,7 @@ int	render(t_cube *cube)
 	{
 		draw_background(cube);
 		move_player(cube, delta_time);
+		init_sprites(cube);
 		raycaster(cube);
 		if (cube->mlx.keys[MAP])
 			minimap(cube);
@@ -85,6 +104,21 @@ void	graphics(t_cube *cube)
 	set_player(&cube->ray, &cube->map);
 	if (!get_walls_textures(&cube->mlx, &cube->map))
 		free_error(cube, ERR_MLX_TEXT);
+
+	/*------SPRITES---------------*/
+	if (!get_sprites_textures(&cube->mlx))
+		free_error(cube, ERR_MLX_SPRITE);
+	cube->mlx.sprites = sprites_lst(&cube->mlx, cube->map.map);
+	
+	// while (cube->mlx.sprites)
+	// {
+	// 	printf("%f\n", cube->mlx.sprites->x);
+	// 	cube->mlx.sprites = cube->mlx.sprites->next;
+	// }
+	
+
+	/*--------------------------*/
+	
 	mlx_loop_hook(cube->mlx.init, &render, cube);
 	mlx_hook(cube->mlx.win, DestroyNotify, StructureNotifyMask,
 		close_window, cube);

@@ -6,7 +6,7 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:34:53 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/01 16:07:45 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/02 15:30:33 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,15 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
+typedef struct s_spt
+{
+	double			x;
+	double			y;
+	double			dist;
+	void			*texture;
+	struct s_spt	*next;
+}	t_spt;
+
 typedef struct s_mlx
 {
 	void	*init;
@@ -84,6 +93,8 @@ typedef struct s_mlx
 	t_img	wall_so;
 	t_img	wall_we;
 	t_img	wall_ea;
+	t_img	spt_fire;
+	t_spt	*sprites;
 }	t_mlx;
 
 enum	e_key_hooks
