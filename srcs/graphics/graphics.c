@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:25:41 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/01 16:25:35 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/02 11:05:34 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,9 @@ void	graphics(t_cube *cube)
 	cube->mlx.render.img = mlx_new_image(cube->mlx.init, WIN_WIDTH, WIN_HEIGHT);
 	if (!cube->mlx.render.img)
 		free_error(cube, ERR_MLX_RENDER);
-	cube->mlx.render.addr = mlx_get_data_addr(cube->mlx.render.img, &cube->mlx.render.bpp, &cube->mlx.render.line_len, &cube->mlx.render.endian);
+	cube->mlx.render.addr = mlx_get_data_addr(cube->mlx.render.img,
+			&cube->mlx.render.bpp, &cube->mlx.render.line_len,
+			&cube->mlx.render.endian);
 	if (!cube->mlx.render.addr)
 		free_error(cube, ERR_MLX_RENDER);
 	set_keystab(cube);

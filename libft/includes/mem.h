@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mem.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 16:14:54 by bert              #+#    #+#             */
-/*   Updated: 2025/01/23 08:50:28 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/02 11:03:36 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void		*ft_free_mapi(int **map, int size);
  * @param tab: An array of pointers to allocated strings.
  * @return None.
  */
-void	*ft_free_tabstr(char **tab);
+void		*ft_free_tabstr(char **tab);
 
 /**
  * Scans the initial n bytes of the memory area pointed to by s for the 

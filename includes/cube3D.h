@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3D.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:19:57 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/01 16:10:28 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/02 11:15:59 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,12 @@ void	move_player(t_cube *cube, double delta_time);
 
 //minimap
 void	minimap(t_cube *cube);
+
+//minimap_utils
+double  limit(double pos);
+void    limit_xy(t_minimap *plan);
+void    init_plan(t_cube *cube, t_minimap *plan);
+void    new_element(t_cube *cube, t_minimap *plan, double fmo_j);
+int     newline_minimap(t_cube *cube, t_minimap *plan, double fmo_i, double tmp);
 
 #endif

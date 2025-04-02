@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: antauber <antauber@student.42.fr>          +#+  +:+       +#+         #
+#    By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 08:19:19 by antauber          #+#    #+#              #
-#    Updated: 2025/04/01 16:06:18 by antauber         ###   ########.fr        #
+#    Updated: 2025/04/02 11:10:05 by ygorget          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ SRCS		:=	cube3D.c\
 				graphics/ray_caster.c		graphics/dda_algo.c\
 				graphics/draw.c				graphics/graphics.c\
 				graphics/handle_hooks.c		graphics/minimap.c\
-				graphics/move_player.c\
+				graphics/move_player.c		graphics/minimap_utils.c\
 				parsing/init.c				parsing/create_tab.c\
 				parsing/read_fd.c			parsing/read_fd_utils.c\
 				parsing/maps.c				parsing/maps_utils.c\

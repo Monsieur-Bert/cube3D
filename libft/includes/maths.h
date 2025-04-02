@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   maths.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 16:14:52 by bert              #+#    #+#             */
-/*   Updated: 2025/01/25 16:16:54 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/02 11:04:11 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char		*ft_itoa(int n);
  * @param y: second integer to compare.
  * @return Max interger between x and y 
  */
-int	ft_max(int x, int y);
+int			ft_max(int x, int y);
 
 /**
  * Return the lesser value of x and y.
@@ -72,7 +72,7 @@ int	ft_max(int x, int y);
  * @param y: second integer to compare.
  * @return Min interger between x and y 
  */
-int	ft_min(int x, int y);
+int			ft_min(int x, int y);
 
 /**
  * Returns the value of x raised to the power of y.
@@ -81,7 +81,7 @@ int	ft_min(int x, int y);
  * @param pow: power to raise to.
  * @return On success, return the value of x to the power of y.
  */
-int	ft_pow(int nb, int power);
+int			ft_pow(int nb, int power);
 
 /**
  * Return the nonnegative square root of x.
@@ -89,6 +89,6 @@ int	ft_pow(int nb, int power);
  * @param nb: nb integer to raise.
  * @return On success, these functions return return the square root of x.
  */
-int	ft_sqrt(int nb);
+int			ft_sqrt(int nb);
 
 #endif
