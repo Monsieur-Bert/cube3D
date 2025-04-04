@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:30:58 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/01 16:16:01 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/04 14:55:16 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,15 @@ bool	get_walls_addr(t_mlx *mlx)
 		return (false);
 	mlx->wall_so.addr = mlx_get_data_addr(mlx->wall_so.img, &mlx->wall_so.bpp,
 			&mlx->wall_so.line_len, &mlx->wall_so.endian);
-	if (!mlx->wall_no.addr)
+	if (!mlx->wall_so.addr)
 		return (false);
 	mlx->wall_we.addr = mlx_get_data_addr(mlx->wall_we.img, &mlx->wall_we.bpp,
 			&mlx->wall_we.line_len, &mlx->wall_we.endian);
-	if (!mlx->wall_no.addr)
+	if (!mlx->wall_we.addr)
 		return (false);
 	mlx->wall_ea.addr = mlx_get_data_addr(mlx->wall_ea.img, &mlx->wall_ea.bpp,
 			&mlx->wall_ea.line_len, &mlx->wall_ea.endian);
-	if (!mlx->wall_no.addr)
+	if (!mlx->wall_ea.addr)
 		return (false);
 	return (true);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:34:53 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/01 16:07:45 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/04 13:34:44 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ typedef struct s_mlx
 	t_img	wall_so;
 	t_img	wall_we;
 	t_img	wall_ea;
+	t_img	door;
 }	t_mlx;
 
 enum	e_key_hooks
@@ -100,7 +101,15 @@ enum	e_key_hooks
 	D_RT_DOWN,
 	MAP,
 	MOUSE,
+	SPACE,
 	Q_QUIT,
+};
+
+enum e_moves
+{
+	NO_RL = 0,
+	RL_Y = 1,
+	RL_X = 2,
 };
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3D.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 10:55:56 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/01 15:55:11 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/02 13:02:09 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	main(int argc, char **argv)
 		ft_free_tabstr(cube.tab);
 		return (1);
 	}
+	cube.door = door(cube.map.map);
 	graphics(&cube);
 	return (0);
 }
