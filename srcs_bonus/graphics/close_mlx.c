@@ -6,7 +6,7 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:33:10 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/02 14:02:34 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/04 16:10:30 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,17 @@ static void	free_walls_textures(t_mlx *mlx)
 		mlx->wall_ea.img = NULL;
 		mlx->wall_ea.addr = NULL;
 	}
-	if (mlx->spt_fire.img != NULL)
+	if (mlx->spt_fire1.img != NULL)
 	{
-		mlx_destroy_image(mlx->init, mlx->spt_fire.img);
-		mlx->spt_fire.img = NULL;
-		mlx->spt_fire.addr = NULL;
+		mlx_destroy_image(mlx->init, mlx->spt_fire1.img);
+		mlx->spt_fire1.img = NULL;
+		mlx->spt_fire1.addr = NULL;
+	}
+	if (mlx->spt_fire2.img != NULL)
+	{
+		mlx_destroy_image(mlx->init, mlx->spt_fire2.img);
+		mlx->spt_fire2.img = NULL;
+		mlx->spt_fire2.addr = NULL;
 	}
 }
 

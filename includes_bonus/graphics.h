@@ -6,7 +6,7 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:34:53 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/02 15:30:33 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/04 16:04:17 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ typedef struct s_ray
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
-	int		prev_start[WIN_WIDTH];
-	int		prev_end[WIN_WIDTH];
+	double	z_buffer[WIN_WIDTH];
 	double	offset;
 	double	wall_x;
 }	t_ray;
@@ -93,7 +92,8 @@ typedef struct s_mlx
 	t_img	wall_so;
 	t_img	wall_we;
 	t_img	wall_ea;
-	t_img	spt_fire;
+	t_img	spt_fire1;
+	t_img	spt_fire2;
 	t_spt	*sprites;
 }	t_mlx;
 

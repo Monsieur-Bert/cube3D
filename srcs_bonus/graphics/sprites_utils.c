@@ -6,7 +6,7 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:56:40 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/02 15:30:33 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/04 16:07:29 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,10 @@ t_spt	*sprites_lst(t_mlx *mlx, char **map)
 		{
 			if (map[i][j] == 'F')
 			{
-				new_node->x = j;
-				new_node->y = i;
+				new_node->x = j + 0.5;
+				new_node->y = i + 0.5;
 				new_node->dist = 0;
-				new_node->texture = mlx->spt_fire.img;
+				new_node->texture = mlx->spt_fire1.img;
 				addback(&node, new_node);
 				new_node = lstnew();
 			}
@@ -86,4 +86,42 @@ t_spt	*sprites_lst(t_mlx *mlx, char **map)
 	}
 	free(new_node);
 	return (node);
+}
+
+void sort_sprites(t_spt **begin_list)
+{
+	t_spt	*current;
+	t_spt	*prev;
+	t_spt	*next;
+	bool	swapped;
+
+	prev = NULL;
+	next = NULL;
+	swapped = true;
+	while (swapped)
+	{
+		swapped = false;
+		current = (*begin_list);
+		prev = NULL;
+		while (current && current->next)
+		{
+			next = current->next;
+			if (current->dist > next->dist)
+			{
+				if (prev)
+					prev->next = next;
+				else
+					*begin_list = next;
+				current->next = next->next;
+				next->next = current;
+				prev = next;
+				swapped = true;
+			}
+			else
+			{
+				prev = current;
+				current = current->next;
+			}
+		}
+	}
 }

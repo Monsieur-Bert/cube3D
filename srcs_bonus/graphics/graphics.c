@@ -6,11 +6,16 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:25:41 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/02 15:40:55 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/04 16:21:20 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cube3D.h>
+
+
+
+//********************************************UTILS SPIRTES
+
 
 static bool	is_moving(t_mlx *mlx)
 {
@@ -40,21 +45,96 @@ static double	get_time_in_seconds(void)
 }
 
 
-void	init_sprites(t_cube *cube)
+void	init_sprites(t_cube *cube, t_spt **sprites)
 {
 	t_spt	*curr;
 
-	curr = cube->mlx.sprites;
+	curr = *sprites;
 	while (curr)
 	{
 		curr->dist = (cube->ray.pos_x - curr->x) * (cube->ray.pos_x - curr->x)
 			- (cube->ray.pos_y - curr->y) * (cube->ray.pos_y - curr->y);
 		curr = curr->next;
 	}
-	curr = cube->mlx.sprites;
-	//sort sprites in order
+	sort_sprites(sprites);
 }
 
+void	draw_sprites(t_cube *cube, double delta_time)
+{
+	t_spt *tmp;
+
+	t_img	curr_sprite;
+	printf("delat time is %f\n", delta_time);
+	if (delta_time > 0.00018)
+		curr_sprite = cube->mlx.spt_fire1;
+	else
+		curr_sprite = cube->mlx.spt_fire2;
+	
+	tmp = cube->mlx.sprites;
+	while (tmp)
+	{
+		//translate sprite position
+		double sprite_x = tmp->x - cube->ray.pos_x;
+		double sprite_y = tmp->y - cube->ray.pos_y;
+		
+		//transform
+		double inv_det = 1.0 / (cube->ray.plane_x * cube->ray.dir_y - cube->ray.dir_x * cube->ray.plane_y);
+		double transform_x = inv_det * (cube->ray.dir_y * sprite_x - cube->ray.dir_x * sprite_y);
+		double transform_y = inv_det * (- cube->ray.plane_y * sprite_x + cube->ray.plane_x * sprite_y);
+		int	sprite_screen_x = (int)cube->mlx.half_width * (1 + transform_x / transform_y);
+		
+		//calculate height of the sprite screen
+		int	sprite_height = fabs((int)WIN_HEIGHT / transform_y);
+
+		//calculate lowest and highest pixest to fill i  current stripe
+		int	draw_start_y = floor(-sprite_height * 0.5 + cube->mlx.half_height); //? + cube->ray.offset
+		if (draw_start_y < 0)
+			draw_start_y = 0;
+		int draw_end_y = sprite_height * 0.5 + cube->mlx.half_height;  //? cube->ray.offset
+
+		//calculate width of the sprite
+		int sprite_width = fabs((int)WIN_HEIGHT / transform_y);
+		int draw_start_x = floor(-sprite_width * 0.5 + sprite_screen_x);
+		if(draw_start_x < 0)
+			draw_start_x = 0;
+		int draw_end_x = sprite_width * 0.5 + sprite_screen_x;
+		if(draw_end_x >= WIN_WIDTH)
+			draw_end_x = WIN_WIDTH;
+
+		//loop throught every vertuical sptripe
+		int stripe = draw_start_x;
+		int y;
+
+
+		while (stripe < draw_end_x)
+		{
+			
+			int tex_x = (int)((stripe - draw_start_x) * curr_sprite.width / sprite_width);
+
+			if (transform_y > 0 && stripe > 0 && stripe < WIN_WIDTH && transform_y < cube->ray.z_buffer[stripe])
+			{
+				y = draw_start_y;
+				while (y < draw_end_y)
+				{
+					int d = (y) * 256 - WIN_HEIGHT * 128 + sprite_height * 128;
+					int text_y = ((d * curr_sprite.height / sprite_height) / 256);
+					int	tex_pxl = text_y * curr_sprite.line_len + tex_x * (curr_sprite.bpp / 8);
+					int text_color = *(int *)(curr_sprite.addr + tex_pxl);
+					// int text_color = 0x000000;
+					// (void)tex_x;
+					if (text_color != 0x000000)
+						ft_put_pixel(&cube->mlx.render, stripe, y, text_color);
+					y++;
+				}
+
+			}
+			stripe++;
+		}
+			
+		tmp = tmp->next;
+	}
+	
+}
 
 
 int	render(t_cube *cube)
@@ -72,8 +152,9 @@ int	render(t_cube *cube)
 	{
 		draw_background(cube);
 		move_player(cube, delta_time);
-		init_sprites(cube);
 		raycaster(cube);
+		printf("before call delta time is %f\n", delta_time);
+		draw_sprites(cube, delta_time);
 		if (cube->mlx.keys[MAP])
 			minimap(cube);
 		mlx_put_image_to_window(cube->mlx.init, cube->mlx.win,
@@ -110,13 +191,6 @@ void	graphics(t_cube *cube)
 		free_error(cube, ERR_MLX_SPRITE);
 	cube->mlx.sprites = sprites_lst(&cube->mlx, cube->map.map);
 	
-	// while (cube->mlx.sprites)
-	// {
-	// 	printf("%f\n", cube->mlx.sprites->x);
-	// 	cube->mlx.sprites = cube->mlx.sprites->next;
-	// }
-	
-
 	/*--------------------------*/
 	
 	mlx_loop_hook(cube->mlx.init, &render, cube);

@@ -6,7 +6,7 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:55:45 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/01 16:14:33 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/04 15:05:58 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	draw_background(t_cube *cube)
 	x = 0;
 	while (x < WIN_WIDTH)
 	{
-		y = cube->ray.prev_start[x];
+		y = 0;
 		while (y < (cube->mlx.half_height) + cube->ray.offset && y <= WIN_HEIGHT)
 			ft_put_pixel(&cube->mlx.render, x, y++, cube->map.ceiling);
-		while (y < cube->ray.prev_end[x] && y <= WIN_HEIGHT)
+		while (y <= WIN_HEIGHT)
 			ft_put_pixel(&cube->mlx.render, x, y++, cube->map.floor);
 		x++;
 	}
@@ -85,8 +85,6 @@ void	draw_walls(t_ray *ray, t_mlx *mlx)
 	ray->draw_end = (ray->line_height >> 1) + (mlx->half_height + ray->offset);
 	if (ray->draw_end >= WIN_HEIGHT)
 		ray->draw_end = WIN_HEIGHT;
-	ray->prev_start[ray->x] = ray->draw_start;
-	ray->prev_end[ray->x] = ray->draw_end;
 	if (!ray->side)
 	{
 		if (ray->ray_dir_x > 0)

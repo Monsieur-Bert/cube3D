@@ -6,7 +6,7 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:51:18 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/01 16:13:51 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/04 15:05:15 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,7 @@ void	set_player(t_ray *ray, t_map *map)
 	i = 0;
 	while (i < WIN_WIDTH)
 	{
-		ray->prev_start[i] = 0;
-		ray->prev_end[i] = WIN_HEIGHT;
+		ray->z_buffer[i] = 0;
 		i++;
 	}
 	set_player_dir(ray, map->pos.pos);

@@ -6,7 +6,7 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:30:58 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/02 14:34:02 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/04 16:09:40 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,22 @@
 
 bool	get_sprites_textures(t_mlx *mlx)
 {
-	mlx->spt_fire.img = mlx_xpm_file_to_image(mlx->init,"Xpm/barrel.xpm",
-		&mlx->spt_fire.width, &mlx->spt_fire.height);
-	if (!mlx->spt_fire.img)
+	mlx->spt_fire1.img = mlx_xpm_file_to_image(mlx->init,"Xpm/sprite_fire_01.xpm",
+		&mlx->spt_fire1.width, &mlx->spt_fire1.height);
+	if (!mlx->spt_fire1.img)
 		return (false);
-	mlx->spt_fire.addr = mlx_get_data_addr(mlx->spt_fire.img, &mlx->spt_fire.bpp,
-		&mlx->spt_fire.line_len, &mlx->spt_fire.endian);
-	if (!mlx->spt_fire.addr)
+	mlx->spt_fire2.img = mlx_xpm_file_to_image(mlx->init,"Xpm/sprite_fire_02.xpm",
+			&mlx->spt_fire2.width, &mlx->spt_fire2.height);
+	if (!mlx->spt_fire2.img)
+			return (false);
+	mlx->spt_fire1.addr = mlx_get_data_addr(mlx->spt_fire1.img, &mlx->spt_fire1.bpp,
+		&mlx->spt_fire1.line_len, &mlx->spt_fire1.endian);
+	if (!mlx->spt_fire1.addr)
 		return (false);
+	mlx->spt_fire2.addr = mlx_get_data_addr(mlx->spt_fire2.img, &mlx->spt_fire2.bpp,
+		&mlx->spt_fire2.line_len, &mlx->spt_fire2.endian);
+	if (!mlx->spt_fire2.addr)
+			return (false);
 	return (true);
 }
 
@@ -85,7 +93,8 @@ void	init_mlx(t_mlx *mlx)
 	init_img(&mlx->wall_so);
 	init_img(&mlx->wall_we);
 	init_img(&mlx->wall_ea);
-	init_img(&mlx->spt_fire);
+	init_img(&mlx->spt_fire1);
+	init_img(&mlx->spt_fire2);
 	mlx->init = NULL;
 	mlx->win = NULL;
 	mlx->keys = NULL;
