@@ -6,7 +6,7 @@
 /*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:25:41 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/02 11:05:34 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/04 15:51:24 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ int	render(t_cube *cube)
 	{
 		draw_background(cube);
 		move_player(cube, delta_time);
+		if (cube->mlx.keys[SPACE])
+			open_door(cube, &cube->door);
 		raycaster(cube);
 		if (cube->mlx.keys[MAP])
 			minimap(cube);
@@ -63,10 +65,8 @@ int	render(t_cube *cube)
 	return (0);
 }
 
-void	graphics(t_cube *cube)
+void	build_mlx(t_cube *cube)
 {
-	init_mlx(&cube->mlx);
-	cube->mlx.init = mlx_init();
 	if (!cube->mlx.init)
 		free_error(cube, ERR_MLX_INIT);
 	cube->mlx.win = mlx_new_window(cube->mlx.init, WIN_WIDTH,
@@ -81,6 +81,13 @@ void	graphics(t_cube *cube)
 			&cube->mlx.render.endian);
 	if (!cube->mlx.render.addr)
 		free_error(cube, ERR_MLX_RENDER);
+}
+
+void	graphics(t_cube *cube)
+{
+	init_mlx(&cube->mlx);
+	cube->mlx.init = mlx_init();
+	build_mlx(cube);
 	set_keystab(cube);
 	set_player(&cube->ray, &cube->map);
 	if (!get_walls_textures(&cube->mlx, &cube->map))

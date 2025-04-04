@@ -6,27 +6,11 @@
 /*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:55:08 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/02 16:07:34 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/04 15:51:36 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cube3D.h>
-
-bool	door_close(t_door **door, int y, int x)
-{
-	t_door *tmp;
-
-	if (!door)
-		return (false);
-	tmp = *door;
-	while (tmp)
-	{
-		if (tmp->x == x && tmp->y == y && tmp->open == false)
-			return (true);
-		tmp = tmp->next;
-	}
-	return (false);
-}
 
 void	perform_dda(t_ray *ray, char **map, t_door *door)
 {
@@ -45,7 +29,9 @@ void	perform_dda(t_ray *ray, char **map, t_door *door)
 			ray->map_y += ray->step_y;
 			ray->side = true;
 		}
-		if (map[ray->map_y][ray->map_x] == '1' || (map[ray->map_y][ray->map_x] == 'D' && door_close(&door, ray->map_y, ray->map_x)))
+		if (map[ray->map_y][ray->map_x] == '1'
+			|| (map[ray->map_y][ray->map_x] == 'D'
+				&& door_close(&door, ray->map_y, ray->map_x, false)))
 			ray->hit = true;
 	}
 	if (!ray->side)

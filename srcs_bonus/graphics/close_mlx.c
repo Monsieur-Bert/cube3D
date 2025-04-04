@@ -6,11 +6,27 @@
 /*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:33:10 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/02 13:47:18 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/04 16:10:10 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cube3D.h>
+
+static void	free_walls_textures_utils(t_mlx *mlx)
+{
+	if (mlx->wall_ea.img != NULL)
+	{
+		mlx_destroy_image(mlx->init, mlx->wall_ea.img);
+		mlx->wall_ea.img = NULL;
+		mlx->wall_ea.addr = NULL;
+	}
+	if (mlx->door.img != NULL)
+	{
+		mlx_destroy_image(mlx->init, mlx->door.img);
+		mlx->door.img = NULL;
+		mlx->door.addr = NULL;
+	}
+}
 
 static void	free_walls_textures(t_mlx *mlx)
 {
@@ -32,18 +48,7 @@ static void	free_walls_textures(t_mlx *mlx)
 		mlx->wall_we.img = NULL;
 		mlx->wall_we.addr = NULL;
 	}
-	if (mlx->wall_ea.img != NULL)
-	{
-		mlx_destroy_image(mlx->init, mlx->wall_ea.img);
-		mlx->wall_ea.img = NULL;
-		mlx->wall_ea.addr = NULL;
-	}
-	if (mlx->door.img != NULL)
-	{
-		mlx_destroy_image(mlx->init, mlx->door.img);
-		mlx->door.img = NULL;
-		mlx->door.addr = NULL;
-	}
+	free_walls_textures_utils(mlx);
 }
 
 static void	free_mlx(t_mlx *mlx)

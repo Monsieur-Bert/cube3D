@@ -6,7 +6,7 @@
 /*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:51:18 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/02 16:26:45 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/04 13:57:56 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	set_player(t_ray *ray, t_map *map)
 	ray->offset = 0;
 	ray->pos_x = map->pos.x + 0.5;
 	ray->pos_y = map->pos.y + 0.5;
+	ray->map_x = 0;
+	ray->map_y = 0;
 	ray->x = 0;
 	i = 0;
 	while (i < WIN_WIDTH)

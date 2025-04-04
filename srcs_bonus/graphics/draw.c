@@ -6,7 +6,7 @@
 /*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:55:45 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/02 16:39:01 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/04 15:54:19 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,6 @@ void	draw_background(t_cube *cube)
 			ft_put_pixel(&cube->mlx.render, x, y++, cube->map.floor);
 		x++;
 	}
-}
-
-void	ft_put_pixel(t_img *img, int x, int y, int color)
-{
-	int	pixel;
-
-	pixel = y * img->line_len + ((x * img->bpp) >> 3);
-	img->addr[pixel] = color & 255;
-	img->addr[pixel + 1] = (color >> 8) & 255;
-	img->addr[pixel + 2] = (color >> 16) & 255;
 }
 
 static void	find_texture_pixel(t_text *text, t_ray *ray)
@@ -76,6 +66,14 @@ static void	add_wall_texture(t_img *img, t_img *wall, t_ray *ray)
 	}
 }
 
+void	door_or_wall(t_cube *cube, t_ray *ray, t_mlx *mlx, t_img *wall)
+{
+	if (cube->map.map[ray->map_y][ray->map_x] == 'D')
+		add_wall_texture(&mlx->render, &mlx->door, ray);
+	else
+		add_wall_texture(&mlx->render, wall, ray);
+}
+
 void	draw_walls(t_cube *cube, t_ray *ray, t_mlx *mlx)
 {
 	ray->line_height = (int)(WIN_HEIGHT / ray->perp_wall_dist);
@@ -90,35 +88,15 @@ void	draw_walls(t_cube *cube, t_ray *ray, t_mlx *mlx)
 	if (!ray->side)
 	{
 		if (ray->ray_dir_x > 0)
-		{
-			if (cube->map.map[ray->map_y][ray->map_x] == 'D')
-				add_wall_texture(&mlx->render, &mlx->door, ray);
-			else
-				add_wall_texture(&mlx->render, &mlx->wall_we, ray);
-		}
+			door_or_wall(cube, ray, mlx, &mlx->wall_we);
 		else
-		{
-			if (cube->map.map[ray->map_y][ray->map_x] == 'D')
-				add_wall_texture(&mlx->render, &mlx->door, ray);
-			else
-				add_wall_texture(&mlx->render, &mlx->wall_ea, ray);
-		}
+			door_or_wall(cube, ray, mlx, &mlx->wall_ea);
 	}
 	else
 	{
 		if (ray->ray_dir_y > 0)
-		{
-			if (cube->map.map[ray->map_y][ray->map_x] == 'D')
-				add_wall_texture(&mlx->render, &mlx->door, ray);
-			else
-				add_wall_texture(&mlx->render, &mlx->wall_no, ray);
-		}
+			door_or_wall(cube, ray, mlx, &mlx->wall_no);
 		else
-		{
-			if (cube->map.map[ray->map_y][ray->map_x] == 'D')
-				add_wall_texture(&mlx->render, &mlx->door, ray);
-			else
-				add_wall_texture(&mlx->render, &mlx->wall_so, ray);
-		}
+			door_or_wall(cube, ray, mlx, &mlx->wall_so);
 	}
 }

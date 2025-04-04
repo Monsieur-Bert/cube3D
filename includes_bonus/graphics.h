@@ -6,7 +6,7 @@
 /*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:34:53 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/02 13:31:21 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/04 13:34:44 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,15 @@ enum	e_key_hooks
 	D_RT_DOWN,
 	MAP,
 	MOUSE,
+	SPACE,
 	Q_QUIT,
+};
+
+enum e_moves
+{
+	NO_RL = 0,
+	RL_Y = 1,
+	RL_X = 2,
 };
 
 #endif

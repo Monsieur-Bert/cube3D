@@ -6,7 +6,7 @@
 /*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 13:23:12 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/02 12:45:50 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/04 14:30:07 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ typedef struct s_cube
 enum e_minimap
 {
 	WALL = 0x000000,
+	DOOR = 0xaa1679,
 	FLOOR = 0xbfc9ca,
 	PLAYER = 0xFFFFFF,
 	VOID = 0x780015,

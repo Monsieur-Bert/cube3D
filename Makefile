@@ -6,7 +6,7 @@
 #    By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 08:19:19 by antauber          #+#    #+#              #
-#    Updated: 2025/04/02 13:03:28 by ygorget          ###   ########.fr        #
+#    Updated: 2025/04/04 15:56:26 by ygorget          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,14 +45,16 @@ SRCS_B_DIR	:=	srcs_bonus
 SRCS_B		:=	cube3D.c\
 				graphics/init_mlx.c			graphics/close_mlx.c\
 				graphics/ray_caster.c		graphics/dda_algo.c\
-				graphics/draw.c				graphics/graphics.c\
-				graphics/handle_hooks.c		graphics/minimap.c\
-				graphics/move_player.c		graphics/minimap_utils.c\
+				graphics/draw.c				graphics/draw_utils.c\
+				graphics/graphics.c			graphics/handle_hooks.c\
+				graphics/move_player.c		graphics/minimap.c\
+				graphics/minimap_utils.c	graphics/minimap_utils_2.c\
+				graphics/door.c\
 				parsing/init.c				parsing/create_tab.c\
 				parsing/read_fd.c			parsing/read_fd_utils.c\
 				parsing/maps.c				parsing/maps_utils.c\
 				parsing/texture.c			parsing/texture_utils.c\
-				parsing/door.c
+				parsing/build_door.c
 
 SRCS_B		:=	$(SRCS_B:%=$(SRCS_B_DIR)/%)
 

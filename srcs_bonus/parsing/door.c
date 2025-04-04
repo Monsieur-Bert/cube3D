@@ -6,7 +6,7 @@
 /*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 13:01:45 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/02 16:40:33 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/04 15:01:59 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ t_door	*lstnew(void)
 		node->x = 0;
 		node->y = 0;
 		node->open = false;
-		//node->open = true;
 		node->next = NULL;
 	}
 	return (node);
@@ -45,7 +44,7 @@ t_door	*lstnew(void)
 void	addback(t_door **node, t_door *new)
 {
 	t_door	*tmp;
-	
+
 	if (!node || !new)
 		return ;
 	tmp = *node;
@@ -61,10 +60,10 @@ void	addback(t_door **node, t_door *new)
 
 t_door	*door(char **map)
 {
-	t_door *node;
-	t_door *new_node;
-	int	i;
-	int	j;
+	t_door	*node;
+	t_door	*new_node;
+	int		i;
+	int		j;
 
 	i = -1;
 	node = NULL;
@@ -79,8 +78,8 @@ t_door	*door(char **map)
 				new_node->x = j;
 				new_node->y = i;
 				addback(&node, new_node);
-				new_node = lstnew();	
-			}			
+				new_node = lstnew();
+			}
 		}
 	}
 	free(new_node);
