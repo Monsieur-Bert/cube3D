@@ -6,7 +6,7 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 10:55:56 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/01 15:55:11 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/07 11:02:14 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,14 @@ void	print_error(char *str)
 	ft_printf(2, "Error\n%s", str);
 }
 
-static int	parsing(char **tab, t_texture *img, t_map *map)
+static int	parsing(char **tab, t_texture *img, t_map *map, t_mlx *mlx)
 {
 	if (texture(tab, img) == 1)
 		return (1);
 	if (maps(tab, 0) == 1)
 		return (1);
 	init_struct(tab, img, map);
+	mlx->sprites = sprites_lst(map->map);
 	return (0);
 }
 
@@ -41,7 +42,7 @@ int	main(int argc, char **argv)
 	cube.tab = create_tab(argv[1]);
 	if (!cube.tab)
 		return (1);
-	if (parsing(cube.tab, &img, &cube.map) == 1)
+	if (parsing(cube.tab, &img, &cube.map, &cube.mlx) == 1)
 	{
 		ft_free_tabstr(cube.tab);
 		return (1);

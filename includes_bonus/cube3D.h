@@ -6,7 +6,7 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:19:57 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/04 12:59:37 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/07 12:44:05 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,10 @@ void	new_element(t_cube *cube, t_minimap *plan, double fmo_j);
 int		newline_minimap(t_cube *cube, t_minimap *plan,
 			double fmo_i, double tmp);
 
-
-t_spt	*sprites_lst(t_mlx *mlx, char **map);
-void sort_sprites(t_spt **begin_list);
+//sprites_utils
+t_spt	*sprites_lst(char **map);
+void 	sort_sprites(t_spt **begin_list);
+void	sprites_clear(t_spt **lst);
 
 			
 #endif

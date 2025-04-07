@@ -6,27 +6,27 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:56:40 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/04 16:07:29 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/07 11:02:02 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cube3D.h>
 
-// static void	lst_clear(t_spt **lst)
-// {
-// 	t_spt	*tmp;
+void	sprites_clear(t_spt **lst)
+{
+	t_spt	*tmp;
 
-// 	if (!lst)
-// 		return ;
-// 	while (*lst)
-// 	{
-// 		tmp = (*lst)->next;
-// 		free(*lst);
-// 		*lst = tmp;
-// 	}
-// }
+	if (!lst)
+		return ;
+	while (*lst)
+	{
+		tmp = (*lst)->next;
+		free(*lst);
+		*lst = tmp;
+	}
+}
 
-static t_spt	*lstnew(void)
+static t_spt	*sprites_lstnew(void)
 {
 	t_spt	*node;
 
@@ -41,7 +41,7 @@ static t_spt	*lstnew(void)
 	return (node);
 }
 
-static void	addback(t_spt **node, t_spt *new)
+static void	sprites_addback(t_spt **node, t_spt *new)
 {
 	t_spt	*tmp;
 
@@ -58,7 +58,7 @@ static void	addback(t_spt **node, t_spt *new)
 	tmp->next = new;
 }
 
-t_spt	*sprites_lst(t_mlx *mlx, char **map)
+t_spt	*sprites_lst(char **map)
 {
 	t_spt	*node;
 	t_spt	*new_node;
@@ -67,7 +67,7 @@ t_spt	*sprites_lst(t_mlx *mlx, char **map)
 
 	i = -1;
 	node = NULL;
-	new_node = lstnew();
+	new_node = sprites_lstnew();
 	while (map[++i])
 	{
 		j = -1;
@@ -78,9 +78,8 @@ t_spt	*sprites_lst(t_mlx *mlx, char **map)
 				new_node->x = j + 0.5;
 				new_node->y = i + 0.5;
 				new_node->dist = 0;
-				new_node->texture = mlx->spt_fire1.img;
-				addback(&node, new_node);
-				new_node = lstnew();
+				sprites_addback(&node, new_node);
+				new_node = sprites_lstnew();
 			}
 		}
 	}

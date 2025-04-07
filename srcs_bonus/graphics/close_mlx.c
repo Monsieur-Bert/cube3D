@@ -6,11 +6,28 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:33:10 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/04 16:10:30 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/07 13:30:28 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cube3D.h>
+
+static void	free_sprites_textures(t_mlx *mlx)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (mlx->sprite_fire[i].img != NULL)
+			{
+				mlx_destroy_image(mlx->init, mlx->sprite_fire[i].img);
+				mlx->sprite_fire[i].img = NULL;
+				mlx->sprite_fire[i].addr = NULL;
+			}
+		i++;
+	}
+}
 
 static void	free_walls_textures(t_mlx *mlx)
 {
@@ -38,22 +55,11 @@ static void	free_walls_textures(t_mlx *mlx)
 		mlx->wall_ea.img = NULL;
 		mlx->wall_ea.addr = NULL;
 	}
-	if (mlx->spt_fire1.img != NULL)
-	{
-		mlx_destroy_image(mlx->init, mlx->spt_fire1.img);
-		mlx->spt_fire1.img = NULL;
-		mlx->spt_fire1.addr = NULL;
-	}
-	if (mlx->spt_fire2.img != NULL)
-	{
-		mlx_destroy_image(mlx->init, mlx->spt_fire2.img);
-		mlx->spt_fire2.img = NULL;
-		mlx->spt_fire2.addr = NULL;
-	}
 }
 
 static void	free_mlx(t_mlx *mlx)
 {
+	free_sprites_textures(mlx);
 	free_walls_textures(mlx);
 	free(mlx->keys);
 	if (mlx->render.img != NULL)
@@ -79,6 +85,7 @@ int	close_window(t_cube *cube)
 {
 	if (cube->mlx.win != NULL)
 		free_mlx(&cube->mlx);
+	sprites_clear(&cube->mlx.sprites);
 	ft_free_tabstr(cube->tab);
 	exit (0);
 }
@@ -86,6 +93,7 @@ int	close_window(t_cube *cube)
 void	free_error(t_cube *cube, char *error_message)
 {
 	free_mlx(&cube->mlx);
+	sprites_clear(&cube->mlx.sprites);
 	ft_free_tabstr(cube->tab);
 	print_error(error_message);
 	exit (1);

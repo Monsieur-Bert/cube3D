@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:20:55 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/02 11:51:07 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/07 11:15:42 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,28 @@
 static void	move_forward_backward(t_cube *cube, int dir, double speed)
 {
 	if (cube->map.map[(int)(cube->ray.pos_y)]
-		[(int)(cube->ray.pos_x + cube->ray.dir_x * speed * dir)] != '1')
+		[(int)(cube->ray.pos_x + cube->ray.dir_x * speed * dir)] != '1'
+		&& cube->map.map[(int)(cube->ray.pos_y)]
+		[(int)(cube->ray.pos_x + cube->ray.dir_x * speed * dir)] != 'F' )
 		cube->ray.pos_x += cube->ray.dir_x * speed * dir;
 	if (cube->map.map[(int)(cube->ray.pos_y + cube->ray.dir_y * speed * dir)]
-		[(int)(cube->ray.pos_x)] != '1')
+		[(int)(cube->ray.pos_x)] != '1'
+		&& cube->map.map[(int)(cube->ray.pos_y + cube->ray.dir_y * speed * dir)]
+		[(int)(cube->ray.pos_x)] != 'F')
 		cube->ray.pos_y += cube->ray.dir_y * speed * dir;
 }
 
 static void	move_right_left(t_cube *cube, int dir, double speed)
 {
 	if (cube->map.map[(int)(cube->ray.pos_y)]
-		[(int)(cube->ray.pos_x - cube->ray.dir_y * speed * dir)] != '1')
+		[(int)(cube->ray.pos_x - cube->ray.dir_y * speed * dir)] != '1'
+		&& cube->map.map[(int)(cube->ray.pos_y)]
+		[(int)(cube->ray.pos_x - cube->ray.dir_y * speed * dir)] != 'F')
 		cube->ray.pos_x -= cube->ray.dir_y * speed * dir;
 	if (cube->map.map[(int)(cube->ray.pos_y + cube->ray.dir_x * speed * dir)]
-		[(int)(cube->ray.pos_x)] != '1')
+		[(int)(cube->ray.pos_x)] != '1'
+		&& cube->map.map[(int)(cube->ray.pos_y + cube->ray.dir_x * speed * dir)]
+		[(int)(cube->ray.pos_x)] != 'F')
 		cube->ray.pos_y += cube->ray.dir_x * speed * dir;
 }
 
