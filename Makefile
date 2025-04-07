@@ -6,7 +6,7 @@
 #    By: antauber <antauber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 08:19:19 by antauber          #+#    #+#              #
-#    Updated: 2025/04/07 11:01:44 by antauber         ###   ########.fr        #
+#    Updated: 2025/04/07 14:41:52 by antauber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ SRCS_B		:=	cube3D.c\
 				graphics/draw.c				graphics/graphics.c\
 				graphics/handle_hooks.c		graphics/minimap.c\
 				graphics/move_player.c		graphics/minimap_utils.c\
+				graphics/draw_sprites.c\
 				parsing/init.c				parsing/create_tab.c\
 				parsing/read_fd.c			parsing/read_fd_utils.c\
 				parsing/maps.c				parsing/maps_utils.c\

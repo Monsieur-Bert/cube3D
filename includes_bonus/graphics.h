@@ -6,7 +6,7 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:34:53 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/07 13:43:50 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/07 15:06:46 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,31 @@ typedef struct s_spt
 	double			dist;
 	struct s_spt	*next;
 }	t_spt;
+
+typedef struct s_ray_spt
+{
+	double	sprite_x;
+	double	sprite_y;
+	double	inv_det;
+	double	trans_x;
+	double	trans_y;
+	int		screen_x;
+	int		height;
+	int		width;
+	int		start_y;
+	int		end_y;
+	int		start_x;
+	int		end_x;
+	double	relative_x;
+	int		text_x;
+	int		d;
+	int		text_y;
+	int		text_pxl;
+	int		text_color;
+	int		stripe;
+	int		y;
+}	t_ray_spt;
+
 
 typedef struct s_img
 {
