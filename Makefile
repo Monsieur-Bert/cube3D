@@ -6,7 +6,7 @@
 #    By: antauber <antauber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 08:19:19 by antauber          #+#    #+#              #
-#    Updated: 2025/04/07 14:41:52 by antauber         ###   ########.fr        #
+#    Updated: 2025/04/07 16:28:07 by antauber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,17 +44,19 @@ SRCS		:=	$(SRCS:%=$(SRCS_DIR)/%)
 SRCS_B_DIR	:=	srcs_bonus
 SRCS_B		:=	cube3D.c\
 				graphics/init_mlx.c			graphics/close_mlx.c\
+				graphics/mlx_utils.c\
 				graphics/ray_caster.c		graphics/dda_algo.c\
 				graphics/draw.c				graphics/draw_utils.c\
 				graphics/graphics.c			graphics/handle_hooks.c\
 				graphics/move_player.c		graphics/minimap.c\
 				graphics/minimap_utils.c	graphics/minimap_utils_2.c\
-				graphics/door.c           graphics/draw_sprites.c\
+				graphics/door.c				graphics/draw_sprites.c\
 				parsing/init.c				parsing/create_tab.c\
 				parsing/read_fd.c			parsing/read_fd_utils.c\
 				parsing/maps.c				parsing/maps_utils.c\
 				parsing/texture.c			parsing/texture_utils.c\
-				parsing/build_door.c  	parsing/sprites_utils.c
+				parsing/build_door.c  		parsing/sprites_utils.c\
+				parsing/sprites_sort.c
 
 SRCS_B		:=	$(SRCS_B:%=$(SRCS_B_DIR)/%)
 
@@ -62,8 +64,8 @@ BUILD_DIR	:=	.build
 BUILD_DIR_B	:=	.build_bonus
 OBJS		:=	$(SRCS:$(SRCS_DIR)/%.c=$(BUILD_DIR)/%.o)
 DEPS		:=	$(SRCS:$(SRCS_DIR)/%.c=$(BUILD_DIR)/%.d)
-OBJS_B        :=    $(SRCS_B:$(SRCS_B_DIR)/%.c=$(BUILD_DIR_B)/%.o)
-DEPS_B        :=    $(SRCS_B:$(SRCS_B_DIR)/%.c=$(BUILD_DIR_B)/%.d)
+OBJS_B		:=	$(SRCS_B:$(SRCS_B_DIR)/%.c=$(BUILD_DIR_B)/%.o)
+DEPS_B		:=	$(SRCS_B:$(SRCS_B_DIR)/%.c=$(BUILD_DIR_B)/%.d)
 
 LIB_DIR		=	libft
 LIBFT		=	libft/libft.a

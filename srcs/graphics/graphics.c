@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:25:41 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/04 14:51:07 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/07 16:08:42 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,11 @@ void	build_mlx(t_cube *cube)
 {
 	if (!cube->mlx.init)
 		free_error(cube, ERR_MLX_INIT);
-	cube->mlx.win = mlx_new_window(cube->mlx.init, WIN_WIDTH,
-			WIN_HEIGHT, "cube_3D");
+	cube->mlx.win = mlx_new_window(cube->mlx.init, WIN_W,
+			WIN_H, "cube_3D");
 	if (!cube->mlx.win)
 		free_error(cube, ERR_MLX_WIN);
-	cube->mlx.render.img = mlx_new_image(cube->mlx.init, WIN_WIDTH, WIN_HEIGHT);
+	cube->mlx.render.img = mlx_new_image(cube->mlx.init, WIN_W, WIN_H);
 	if (!cube->mlx.render.img)
 		free_error(cube, ERR_MLX_RENDER);
 	cube->mlx.render.addr = mlx_get_data_addr(cube->mlx.render.img,

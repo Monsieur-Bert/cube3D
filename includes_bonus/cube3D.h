@@ -6,7 +6,7 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:19:57 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/07 14:42:18 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/07 16:31:02 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,10 @@ t_door	*door(char **map);
 /* ************************************************************************** */
 void	graphics(t_cube *cube);
 
+//mlx_utils.c
+void	init_img(t_img *img);
+void	free_error(t_cube *cube, char *error_message);
+
 //init_mlx.c
 bool	get_sprites_textures(t_mlx *mlx);
 bool	get_walls_addr(t_mlx *mlx);
@@ -89,8 +93,8 @@ bool	get_walls_textures(t_mlx *mlx, t_map *map);
 void	init_mlx(t_mlx *mlx);
 
 //close_mlx
-void	free_error(t_cube *cube, char *error_message);
 int		close_window(t_cube *cube);
+void	free_mlx(t_mlx *mlx);
 
 //handle_hooks
 int		mouse_hook(int x, int y, t_cube *cube);
@@ -129,9 +133,10 @@ int		newline_minimap(t_cube *cube, t_minimap *plan,
 
 //sprites_utils
 t_spt	*sprites_lst(char **map);
-void 	sort_sprites(t_spt **begin_list);
+void	sort_sprites(t_spt **begin_list, bool swapped);
 void	sprites_clear(t_spt **lst);
 void	draw_sprites(t_cube *cube, double delta_time);
+
 //minimap_utils_2
 bool	close_door_minimap(t_door **door, double y, double x);
 

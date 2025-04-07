@@ -6,7 +6,7 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/02 14:56:40 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/07 11:02:02 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/07 16:23:42 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,42 +85,4 @@ t_spt	*sprites_lst(char **map)
 	}
 	free(new_node);
 	return (node);
-}
-
-void sort_sprites(t_spt **begin_list)
-{
-	t_spt	*current;
-	t_spt	*prev;
-	t_spt	*next;
-	bool	swapped;
-
-	prev = NULL;
-	next = NULL;
-	swapped = true;
-	while (swapped)
-	{
-		swapped = false;
-		current = (*begin_list);
-		prev = NULL;
-		while (current && current->next)
-		{
-			next = current->next;
-			if (current->dist > next->dist)
-			{
-				if (prev)
-					prev->next = next;
-				else
-					*begin_list = next;
-				current->next = next->next;
-				next->next = current;
-				prev = next;
-				swapped = true;
-			}
-			else
-			{
-				prev = current;
-				current = current->next;
-			}
-		}
-	}
 }

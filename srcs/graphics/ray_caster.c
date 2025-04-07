@@ -6,7 +6,7 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:51:18 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/01 16:13:51 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/07 16:08:42 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	init_ray(t_ray *ray)
 {
-	ray->cam_x = 2 * ray->x / (double)WIN_WIDTH - 1;
+	ray->cam_x = 2 * ray->x / (double)WIN_W - 1;
 	ray->ray_dir_x = ray->dir_x + ray->plane_x * ray->cam_x;
 	ray->ray_dir_y = ray->dir_y + ray->plane_y * ray->cam_x;
 	ray->map_x = (int)ray->pos_x;
@@ -66,10 +66,10 @@ void	set_player(t_ray *ray, t_map *map)
 	ray->pos_y = map->pos.y + 0.5;
 	ray->x = 0;
 	i = 0;
-	while (i < WIN_WIDTH)
+	while (i < WIN_W)
 	{
 		ray->prev_start[i] = 0;
-		ray->prev_end[i] = WIN_HEIGHT;
+		ray->prev_end[i] = WIN_H;
 		i++;
 	}
 	set_player_dir(ray, map->pos.pos);
@@ -78,7 +78,7 @@ void	set_player(t_ray *ray, t_map *map)
 void	raycaster(t_cube *cube)
 {
 	cube->ray.x = 0;
-	while (cube->ray.x < WIN_WIDTH)
+	while (cube->ray.x < WIN_W)
 	{
 		init_ray(&cube->ray);
 		find_step_dda(&cube->ray);

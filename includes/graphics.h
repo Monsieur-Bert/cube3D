@@ -6,15 +6,15 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:34:53 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/01 16:07:45 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/07 16:28:57 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GRAPHICS_H
 # define GRAPHICS_H
 
-# define WIN_WIDTH	920
-# define WIN_HEIGHT	480
+# define WIN_W		920
+# define WIN_H		480
 # define MOVE_SPEED	5.5
 # define ROT_SPEED	2.5
 # define MOUSE_SENSI 0.5
@@ -45,8 +45,8 @@ typedef struct s_ray
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
-	int		prev_start[WIN_WIDTH];
-	int		prev_end[WIN_WIDTH];
+	int		prev_start[WIN_W];
+	int		prev_end[WIN_W];
 	double	offset;
 	double	wall_x;
 }	t_ray;

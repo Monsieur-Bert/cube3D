@@ -6,7 +6,7 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:20:55 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/01 16:12:08 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/07 16:08:42 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	move_player(t_cube *cube, double delta_time)
 	if (cube->mlx.keys[L_RT_LEFT] == true)
 		rotate_player(&cube->ray, -1, rot_speed);
 	if (cube->mlx.keys[U_RT_UP] == true
-		&& (cube->mlx.half_height + cube->ray.offset < WIN_HEIGHT))
+		&& (cube->mlx.half_height + cube->ray.offset < WIN_H))
 		cube->ray.offset += 600 * delta_time;
 	if (cube->mlx.keys[D_RT_DOWN] == true
 		&& (cube->mlx.half_height + cube->ray.offset > 0))

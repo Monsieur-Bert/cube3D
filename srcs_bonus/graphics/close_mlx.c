@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   close_mlx.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:33:10 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/04 16:10:10 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/07 16:29:09 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,16 @@ static void	free_sprites_textures(t_mlx *mlx)
 	i = 0;
 	while (i < 4)
 	{
-		if (mlx->sprite_fire[i].img != NULL)
-			{
-				mlx_destroy_image(mlx->init, mlx->sprite_fire[i].img);
-				mlx->sprite_fire[i].img = NULL;
-				mlx->sprite_fire[i].addr = NULL;
-			}
+		if (mlx->spt_fire[i].img != NULL)
+		{
+			mlx_destroy_image(mlx->init, mlx->spt_fire[i].img);
+			mlx->spt_fire[i].img = NULL;
+			mlx->spt_fire[i].addr = NULL;
+		}
 		i++;
-  }
-  
+	}
+}
+
 static void	free_walls_textures_utils(t_mlx *mlx)
 {
 	if (mlx->wall_ea.img != NULL)
@@ -67,7 +68,7 @@ static void	free_walls_textures(t_mlx *mlx)
 	free_walls_textures_utils(mlx);
 }
 
-static void	free_mlx(t_mlx *mlx)
+void	free_mlx(t_mlx *mlx)
 {
 	free_sprites_textures(mlx);
 	free_walls_textures(mlx);
@@ -99,14 +100,4 @@ int	close_window(t_cube *cube)
 	ft_free_tabstr(cube->tab);
 	lst_clear(&cube->door);
 	exit (0);
-}
-
-void	free_error(t_cube *cube, char *error_message)
-{
-	free_mlx(&cube->mlx);
-	sprites_clear(&cube->mlx.sprites);
-	ft_free_tabstr(cube->tab);
-	lst_clear(&cube->door);
-	print_error(error_message);
-	exit (1);
 }

@@ -6,7 +6,7 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 14:39:33 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/07 15:21:47 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/07 16:15:40 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static t_img	update_sprite_animation(t_mlx *mlx, double delta_time)
 		if (frame > 3)
 			frame = 0;
 	}
-	return (mlx->sprite_fire[frame]);
+	return (mlx->spt_fire[frame]);
 }
 
 static void	init_sprites(t_cube *cube, t_spt **sprites)
@@ -38,7 +38,7 @@ static void	init_sprites(t_cube *cube, t_spt **sprites)
 			- (cube->ray.pos_y - curr->y) * (cube->ray.pos_y - curr->y);
 		curr = curr->next;
 	}
-	sort_sprites(sprites);
+	sort_sprites(sprites, true);
 }
 
 static void	init_ray_sprite(t_cube *cube, t_ray_spt *r_spt, t_spt *tmp)
@@ -53,31 +53,31 @@ static void	init_ray_sprite(t_cube *cube, t_ray_spt *r_spt, t_spt *tmp)
 			+ cube->ray.plane_x * r_spt->sprite_y);
 	r_spt->screen_x = (int)cube->mlx.half_width
 		* (1 + r_spt->trans_x / r_spt->trans_y);
-	r_spt->height = fabs((int)WIN_HEIGHT / r_spt->trans_y);
+	r_spt->height = fabs((int)WIN_H / r_spt->trans_y);
 	r_spt->start_y = floor(-r_spt->height * 0.5
 			+ cube->mlx.half_height + cube->ray.offset);
 	if (r_spt->start_y < 0)
 		r_spt->start_y = 0;
 	r_spt->end_y = r_spt->height * 0.5 + cube->mlx.half_height
 		+ cube->ray.offset;
-	r_spt->width = fabs((int)WIN_HEIGHT / r_spt->trans_y);
+	r_spt->width = fabs((int)WIN_H / r_spt->trans_y);
 	r_spt->start_x = floor(-r_spt->width * 0.5 + r_spt->screen_x);
 	if (r_spt->start_x < 0)
 		r_spt->start_x = 0;
 	r_spt->end_x = r_spt->width * 0.5 + r_spt->screen_x;
-	if (r_spt->end_x >= WIN_WIDTH)
-		r_spt->end_x = WIN_WIDTH;
+	if (r_spt->end_x >= WIN_W)
+		r_spt->end_x = WIN_W;
 }
 
 static void	draw_stripes(t_cube *cube, t_img *curr_spt, t_ray_spt *r_spt)
 {
-	if (r_spt->trans_y > 0 && r_spt->stripe > 0 && r_spt->stripe < WIN_WIDTH
+	if (r_spt->trans_y > 0 && r_spt->stripe > 0 && r_spt->stripe < WIN_W
 		&& r_spt->trans_y < cube->ray.z_buffer[r_spt->stripe])
 	{
 		r_spt->y = r_spt->start_y;
 		while (r_spt->y < r_spt->end_y)
 		{
-			r_spt->d = (r_spt->y - cube->ray.offset) * 256 - WIN_HEIGHT
+			r_spt->d = (r_spt->y - cube->ray.offset) * 256 - WIN_H
 				* 128 + r_spt->height * 128;
 			r_spt->text_y = ((r_spt->d * curr_spt->height / r_spt->height)
 					/ 256);
@@ -86,8 +86,8 @@ static void	draw_stripes(t_cube *cube, t_img *curr_spt, t_ray_spt *r_spt)
 				+ r_spt->text_x * (curr_spt->bpp / 8);
 			r_spt->text_color = *(int *)(curr_spt->addr + r_spt->text_pxl);
 			if (r_spt->text_color != 0x000000 && r_spt->y >= 0
-				&& r_spt->y < WIN_HEIGHT && r_spt->stripe >= 0
-				&& r_spt->stripe < WIN_WIDTH)
+				&& r_spt->y < WIN_H && r_spt->stripe >= 0
+				&& r_spt->stripe < WIN_W)
 				ft_put_pixel(&cube->mlx.render, r_spt->stripe, r_spt->y,
 					r_spt->text_color);
 			r_spt->y++;
@@ -108,7 +108,7 @@ void	draw_sprites(t_cube *cube, double delta_time)
 	{
 		init_ray_sprite(cube, &r_spt, tmp);
 		r_spt.stripe = r_spt.start_x;
-		while (r_spt.stripe < r_spt.end_x && r_spt.stripe < WIN_WIDTH)
+		while (r_spt.stripe < r_spt.end_x && r_spt.stripe < WIN_W)
 		{
 			r_spt.relative_x = (double)(r_spt.stripe
 					- (r_spt.screen_x - r_spt.width * 0.5)) / r_spt.width;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:55:45 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/04 15:54:19 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/07 16:09:29 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ void	draw_background(t_cube *cube)
 	int	y;
 
 	x = 0;
-	while (x < WIN_WIDTH)
+	while (x < WIN_W)
 	{
 		y = 0;
-		while (y < (cube->mlx.half_height) + cube->ray.offset && y <= WIN_HEIGHT)
+		while (y < (cube->mlx.half_height) + cube->ray.offset && y <= WIN_H)
 			ft_put_pixel(&cube->mlx.render, x, y++, cube->map.ceiling);
-		while (y <= WIN_HEIGHT)
+		while (y <= WIN_H)
 			ft_put_pixel(&cube->mlx.render, x, y++, cube->map.floor);
 		x++;
 	}
@@ -37,7 +37,7 @@ static void	find_texture_pixel(t_text *text, t_ray *ray)
 	if (ray->side && ray->ray_dir_y < 0)
 		text->x = 64 - text->x - 1;
 	text->step = 1.0 * (double)64 / ray->line_height;
-	text->pos = (ray->draw_start - ((WIN_HEIGHT >> 1) + ray->offset)
+	text->pos = (ray->draw_start - ((WIN_H >> 1) + ray->offset)
 			+ (ray->line_height >> 1)) * text->step;
 }
 
@@ -51,7 +51,7 @@ static void	add_wall_texture(t_img *img, t_img *wall, t_ray *ray)
 		ray->wall_x = ray->pos_x + ray->perp_wall_dist * ray->ray_dir_x;
 	ray->wall_x -= floor(ray->wall_x);
 	find_texture_pixel(&text, ray);
-	while (ray->draw_start < ray->draw_end && ray->draw_start < WIN_HEIGHT)
+	while (ray->draw_start < ray->draw_end && ray->draw_start < WIN_H)
 	{
 		if (ray->draw_start >= 0)
 		{
@@ -76,13 +76,14 @@ void	door_or_wall(t_cube *cube, t_ray *ray, t_mlx *mlx, t_img *wall)
 
 void	draw_walls(t_cube *cube, t_ray *ray, t_mlx *mlx)
 {
-	ray->line_height = (int)(WIN_HEIGHT / ray->perp_wall_dist);
-	ray->draw_start = - (ray->line_height >> 1) + (mlx->half_height + ray->offset);
+	ray->line_height = (int)(WIN_H / ray->perp_wall_dist);
+	ray->draw_start = - (ray->line_height >> 1)
+		+ (mlx->half_height + ray->offset);
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;
 	ray->draw_end = (ray->line_height >> 1) + (mlx->half_height + ray->offset);
-	if (ray->draw_end >= WIN_HEIGHT)
-		ray->draw_end = WIN_HEIGHT;
+	if (ray->draw_end >= WIN_H)
+		ray->draw_end = WIN_H;
 	if (!ray->side)
 	{
 		if (ray->ray_dir_x > 0)

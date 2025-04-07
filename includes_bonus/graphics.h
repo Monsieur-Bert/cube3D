@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   graphics.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:34:53 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/04 13:34:44 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/07 16:30:44 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GRAPHICS_H
 # define GRAPHICS_H
 
-# define WIN_WIDTH		920
-# define WIN_HEIGHT		480
+# define WIN_W			920
+# define WIN_H			480
 # define MOVE_SPEED		5.5
 # define ROT_SPEED		2.5
 # define MOUSE_SENSI 	0.5
@@ -46,7 +46,7 @@ typedef struct s_ray
 	int		line_height;
 	int		draw_start;
 	int		draw_end;
-	double	z_buffer[WIN_WIDTH];
+	double	z_buffer[WIN_W];
 	double	offset;
 	double	wall_x;
 }	t_ray;
@@ -93,7 +93,6 @@ typedef struct s_ray_spt
 	int		y;
 }	t_ray_spt;
 
-
 typedef struct s_img
 {
 	void	*img;
@@ -118,7 +117,7 @@ typedef struct s_mlx
 	t_img	wall_we;
 	t_img	wall_ea;
 	t_spt	*sprites;
-	t_img	sprite_fire[4];
+	t_img	spt_fire[4];
 	double	sprite_timer;
 	t_img	door;
 }	t_mlx;
