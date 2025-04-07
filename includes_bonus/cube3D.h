@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3D.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:19:57 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/04 15:58:02 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/07 14:42:18 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ t_door	*door(char **map);
 void	graphics(t_cube *cube);
 
 //init_mlx.c
+bool	get_sprites_textures(t_mlx *mlx);
 bool	get_walls_addr(t_mlx *mlx);
 bool	get_walls_textures(t_mlx *mlx, t_map *map);
 void	init_mlx(t_mlx *mlx);
@@ -126,6 +127,11 @@ void	new_element(t_cube *cube, t_minimap *plan, double fmo_j);
 int		newline_minimap(t_cube *cube, t_minimap *plan,
 			double fmo_i, double tmp);
 
+//sprites_utils
+t_spt	*sprites_lst(char **map);
+void 	sort_sprites(t_spt **begin_list);
+void	sprites_clear(t_spt **lst);
+void	draw_sprites(t_cube *cube, double delta_time);
 //minimap_utils_2
 bool	close_door_minimap(t_door **door, double y, double x);
 

@@ -6,11 +6,51 @@
 /*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:30:58 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/04 15:00:55 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/07 13:50:31 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cube3D.h>
+
+static bool	get_sprites_addr(t_mlx *mlx)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		mlx->sprite_fire[i].addr = mlx_get_data_addr(mlx->sprite_fire[i].img, &mlx->sprite_fire[i].bpp,
+			&mlx->sprite_fire[i].line_len, &mlx->sprite_fire[i].endian);
+		if (!mlx->sprite_fire[i].addr)
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
+
+bool	get_sprites_textures(t_mlx *mlx)
+{
+	mlx->sprite_fire[0].img = mlx_xpm_file_to_image(mlx->init,"Xpm/sprites/fire_01.xpm",
+		&mlx->sprite_fire[0].width, &mlx->sprite_fire[0].height);
+	if (!mlx->sprite_fire[0].img)
+		return (false);
+	mlx->sprite_fire[1].img = mlx_xpm_file_to_image(mlx->init,"Xpm/sprites/fire_02.xpm",
+			&mlx->sprite_fire[1].width, &mlx->sprite_fire[1].height);
+	if (!mlx->sprite_fire[1].img)
+			return (false);
+	mlx->sprite_fire[2].img = mlx_xpm_file_to_image(mlx->init,"Xpm/sprites/fire_03.xpm",
+			&mlx->sprite_fire[2].width, &mlx->sprite_fire[2].height);
+	if (!mlx->sprite_fire[2].img)
+			return (false);
+	mlx->sprite_fire[3].img = mlx_xpm_file_to_image(mlx->init,"Xpm/sprites/fire_04.xpm",
+			&mlx->sprite_fire[3].width, &mlx->sprite_fire[3].height);
+	if (!mlx->sprite_fire[3].img)
+			return (false);
+	if (!get_sprites_addr(mlx))
+		return (false);
+	return (true);
+}
 
 bool	get_walls_addr(t_mlx *mlx)
 {
@@ -80,10 +120,13 @@ void	init_mlx(t_mlx *mlx)
 	init_img(&mlx->wall_so);
 	init_img(&mlx->wall_we);
 	init_img(&mlx->wall_ea);
+	init_img(&mlx->sprite_fire[0]);
+	init_img(&mlx->sprite_fire[1]);
 	init_img(&mlx->door);
 	mlx->init = NULL;
 	mlx->win = NULL;
 	mlx->keys = NULL;
 	mlx->half_width = WIN_WIDTH >> 1;
 	mlx->half_height = WIN_HEIGHT >> 1;
+	mlx->sprite_timer = 0;
 }

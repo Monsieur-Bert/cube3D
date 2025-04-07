@@ -12,6 +12,22 @@
 
 #include <cube3D.h>
 
+static void	free_sprites_textures(t_mlx *mlx)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (mlx->sprite_fire[i].img != NULL)
+			{
+				mlx_destroy_image(mlx->init, mlx->sprite_fire[i].img);
+				mlx->sprite_fire[i].img = NULL;
+				mlx->sprite_fire[i].addr = NULL;
+			}
+		i++;
+  }
+  
 static void	free_walls_textures_utils(t_mlx *mlx)
 {
 	if (mlx->wall_ea.img != NULL)
@@ -53,6 +69,7 @@ static void	free_walls_textures(t_mlx *mlx)
 
 static void	free_mlx(t_mlx *mlx)
 {
+	free_sprites_textures(mlx);
 	free_walls_textures(mlx);
 	free(mlx->keys);
 	if (mlx->render.img != NULL)
@@ -78,6 +95,7 @@ int	close_window(t_cube *cube)
 {
 	if (cube->mlx.win != NULL)
 		free_mlx(&cube->mlx);
+	sprites_clear(&cube->mlx.sprites);
 	ft_free_tabstr(cube->tab);
 	lst_clear(&cube->door);
 	exit (0);
@@ -86,6 +104,7 @@ int	close_window(t_cube *cube)
 void	free_error(t_cube *cube, char *error_message)
 {
 	free_mlx(&cube->mlx);
+	sprites_clear(&cube->mlx.sprites);
 	ft_free_tabstr(cube->tab);
 	lst_clear(&cube->door);
 	print_error(error_message);

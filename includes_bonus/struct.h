@@ -99,6 +99,7 @@ enum e_minimap
 	DOOR = 0xaa1679,
 	FLOOR = 0xbfc9ca,
 	PLAYER = 0xFFFFFF,
+	FIRE = 0x247932,
 	VOID = 0x780015,
 };
 
