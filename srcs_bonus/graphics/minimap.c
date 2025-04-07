@@ -6,7 +6,7 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 16:08:11 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/07 15:24:46 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/04 15:00:07 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,16 @@ void	draw_map_element(t_cube *cube, t_minimap *plan)
 		|| (int)plan->j >= (int)ft_strlen(cube->map.map[(int)plan->i])
 		|| cube->map.map[(int)plan->i][(int)plan->j] == ' ')
 		draw_tile(&cube->mlx.render, VOID, plan);
+	else if (cube->map.map[(int)plan->i][(int)plan->j] == 'D'
+		&& close_door_minimap(&cube->door, plan->i, plan->j))
+		draw_tile(&cube->mlx.render, DOOR, plan);
 	else if (cube->map.map[(int)plan->i][(int)plan->j] == '1')
 		draw_tile(&cube->mlx.render, WALL, plan);
 	else if (cube->map.map[(int)plan->i][(int)plan->j] == 'F')
 		draw_tile(&cube->mlx.render, FIRE, plan);
 	else if (cube->map.map[(int)plan->i][(int)plan->j] == '0'
-		|| is_character(cube->map.map[(int)plan->i][(int)plan->j]))
+		|| is_character(cube->map.map[(int)plan->i][(int)plan->j])
+		|| !close_door_minimap(&cube->door, plan->i, plan->j))
 		draw_tile(&cube->mlx.render, FLOOR, plan);
 }
 
@@ -75,11 +79,15 @@ void	draw_part_element(t_cube *cube, t_minimap *plan)
 	if (i >= ft_maplen(cube->map.map) || j >= (int)ft_strlen(cube->map.map[i])
 		|| cube->map.map[i][j] == ' ')
 		draw_tile(&cube->mlx.render, VOID, plan);
+	else if (cube->map.map[i][j] == 'D'
+		&& close_door_minimap(&cube->door, i, j))
+		draw_tile(&cube->mlx.render, DOOR, plan);
 	else if (cube->map.map[i][j] == '1')
 		draw_tile(&cube->mlx.render, WALL, plan);
 		else if (cube->map.map[i][j] == 'F')
 		draw_tile(&cube->mlx.render, FIRE, plan);
-	else if (cube->map.map[i][j] == '0' || is_character(cube->map.map[i][j]))
+	else if (cube->map.map[i][j] == '0' || is_character(cube->map.map[i][j])
+			|| close_door_minimap(&cube->door, i, j))
 		draw_tile(&cube->mlx.render, FLOOR, plan);
 }
 

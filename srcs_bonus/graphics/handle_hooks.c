@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_hooks.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:43:37 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/01 16:24:23 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/04 14:29:14 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int	key_release(int keysym, t_cube *cube)
 
 static void	activ_map_n_mouse(int keysym, t_cube *cube)
 {
+	if (keysym == XK_space)
+		cube->mlx.keys[SPACE] = true;
 	if (keysym == XK_m)
 	{
 		cube->mlx.keys[MOUSE] = !cube->mlx.keys[MOUSE];

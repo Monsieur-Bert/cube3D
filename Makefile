@@ -45,15 +45,17 @@ SRCS_B_DIR	:=	srcs_bonus
 SRCS_B		:=	cube3D.c\
 				graphics/init_mlx.c			graphics/close_mlx.c\
 				graphics/ray_caster.c		graphics/dda_algo.c\
-				graphics/draw.c				graphics/graphics.c\
-				graphics/handle_hooks.c		graphics/minimap.c\
-				graphics/move_player.c		graphics/minimap_utils.c\
-				graphics/draw_sprites.c\
+				graphics/draw.c				graphics/draw_utils.c\
+				graphics/graphics.c			graphics/handle_hooks.c\
+				graphics/move_player.c		graphics/minimap.c\
+				graphics/minimap_utils.c	graphics/minimap_utils_2.c\
+				graphics/door.c           graphics/draw_sprites.c\
 				parsing/init.c				parsing/create_tab.c\
 				parsing/read_fd.c			parsing/read_fd_utils.c\
 				parsing/maps.c				parsing/maps_utils.c\
 				parsing/texture.c			parsing/texture_utils.c\
-				parsing/sprites_utils.c
+				parsing/build_door.c  	parsing/sprites_utils.c
+
 SRCS_B		:=	$(SRCS_B:%=$(SRCS_B_DIR)/%)
 
 BUILD_DIR	:=	.build

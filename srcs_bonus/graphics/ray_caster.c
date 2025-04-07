@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray_caster.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:51:18 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/04 15:05:15 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/04 13:57:56 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	set_player(t_ray *ray, t_map *map)
 	ray->offset = 0;
 	ray->pos_x = map->pos.x + 0.5;
 	ray->pos_y = map->pos.y + 0.5;
+	ray->map_x = 0;
+	ray->map_y = 0;
 	ray->x = 0;
 	i = 0;
 	while (i < WIN_WIDTH)
@@ -81,8 +83,8 @@ void	raycaster(t_cube *cube)
 	{
 		init_ray(&cube->ray);
 		find_step_dda(&cube->ray);
-		perform_dda(&cube->ray, cube->map.map);
-		draw_walls(&cube->ray, &cube->mlx);
+		perform_dda(&cube->ray, cube->map.map, cube->door);
+		draw_walls(cube, &cube->ray, &cube->mlx);
 		cube->ray.x++;
 	}
 }

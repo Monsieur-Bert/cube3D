@@ -63,10 +63,19 @@ char	*read_fd(int fd, int count);
 //maps_utils.c
 int		one_charactere(int p);
 int		ft_maplen(char **tab);
+bool	wall_or_floor(char c);
+bool	is_sprite(char c);
+int		door_in_wall(char **tab, int i, int j);
 
 //maps.c
 bool	is_character(char c);
 int		maps(char **tab, int p);
+
+//build_door
+void	lst_clear(t_door **lst);
+t_door	*lstnew(void);
+void	addback(t_door **node, t_door *new);
+t_door	*door(char **map);
 
 /* ************************************************************************** */
 /*                                  GRAPHICS                                  */
@@ -90,7 +99,8 @@ int		key_press(int keysym, t_cube *cube);
 void	set_keystab(t_cube *cube);
 
 //dda_algo
-void	perform_dda(t_ray *ray, char **map);
+bool	door_close(t_door **door, double y, double x, int rl);
+void	perform_dda(t_ray *ray, char **map, t_door *door);
 void	find_step_dda(t_ray *ray);
 
 //raycaster
@@ -100,7 +110,7 @@ void	set_player(t_ray *ray, t_map *map);
 //draw
 void	draw_background(t_cube *cube);
 void	ft_put_pixel(t_img *img, int x, int y, int color);
-void	draw_walls(t_ray *ray, t_mlx *mlx);
+void	draw_walls(t_cube *cube, t_ray *ray, t_mlx *mlx);
 
 //move_player
 void	rotate_player(t_ray *ray, int dir, double speed);
@@ -122,5 +132,12 @@ t_spt	*sprites_lst(char **map);
 void 	sort_sprites(t_spt **begin_list);
 void	sprites_clear(t_spt **lst);
 void	draw_sprites(t_cube *cube, double delta_time);
+//minimap_utils_2
+bool	close_door_minimap(t_door **door, double y, double x);
+
+//door
+bool	is_door(t_door *tmp, double y, double x, int rl);
+bool	door_close(t_door **door, double y, double x, int rl);
+void	open_door(t_cube *cube, t_door **door);
 
 #endif

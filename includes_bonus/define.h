@@ -6,7 +6,7 @@
 /*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 13:21:55 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/02 14:05:37 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/04 15:58:10 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,5 @@
 # define ERR_MLX_TEXT	"mlx create wall texture error\n"
 # define ERR_MLX_SPRITE	"mlx create sprite texture error\n"
 # define ERR_DOOR   	"a door isn't into a wall\n"
-
 
 #endif
