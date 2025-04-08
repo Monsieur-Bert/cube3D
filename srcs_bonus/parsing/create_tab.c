@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_tab.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:43:30 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/01 15:56:48 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/08 12:08:00 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	backslash(char *str)
 	skip_element(str, &i);
 	while (str[i] == '\n')
 		i++;
-	while (str[++i])
+	while (str[i] && str[++i])
 	{
 		if (str[i] == '\n' && str[i - 1] == '\n')
 		{

@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   door.c                                             :+:      :+:    :+:   */
+/*   sprites_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/02 13:01:45 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/04 15:01:59 by ygorget          ###   ########.fr       */
+/*   Created: 2025/04/02 14:56:40 by antauber          #+#    #+#             */
+/*   Updated: 2025/04/07 16:23:42 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cube3D.h>
 
-void	lst_clear(t_door **lst)
+void	sprites_clear(t_spt **lst)
 {
-	t_door	*tmp;
+	t_spt	*tmp;
 
 	if (!lst)
 		return ;
@@ -26,24 +26,24 @@ void	lst_clear(t_door **lst)
 	}
 }
 
-t_door	*lstnew(void)
+static t_spt	*sprites_lstnew(void)
 {
-	t_door	*node;
+	t_spt	*node;
 
 	node = malloc(sizeof(*node));
 	if (node)
 	{
 		node->x = 0;
 		node->y = 0;
-		node->open = false;
+		node->dist = 0;
 		node->next = NULL;
 	}
 	return (node);
 }
 
-void	addback(t_door **node, t_door *new)
+static void	sprites_addback(t_spt **node, t_spt *new)
 {
-	t_door	*tmp;
+	t_spt	*tmp;
 
 	if (!node || !new)
 		return ;
@@ -58,27 +58,28 @@ void	addback(t_door **node, t_door *new)
 	tmp->next = new;
 }
 
-t_door	*door(char **map)
+t_spt	*sprites_lst(char **map)
 {
-	t_door	*node;
-	t_door	*new_node;
+	t_spt	*node;
+	t_spt	*new_node;
 	int		i;
 	int		j;
 
 	i = -1;
 	node = NULL;
-	new_node = lstnew();
+	new_node = sprites_lstnew();
 	while (map[++i])
 	{
 		j = -1;
 		while (map[i][++j])
 		{
-			if (map[i][j] == 'D')
+			if (map[i][j] == 'F')
 			{
-				new_node->x = j;
-				new_node->y = i;
-				addback(&node, new_node);
-				new_node = lstnew();
+				new_node->x = j + 0.5;
+				new_node->y = i + 0.5;
+				new_node->dist = 0;
+				sprites_addback(&node, new_node);
+				new_node = sprites_lstnew();
 			}
 		}
 	}

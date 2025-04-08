@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:30:58 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/04 14:55:16 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/07 16:08:42 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,6 @@ void	init_mlx(t_mlx *mlx)
 	mlx->init = NULL;
 	mlx->win = NULL;
 	mlx->keys = NULL;
-	mlx->half_width = WIN_WIDTH >> 1;
-	mlx->half_height = WIN_HEIGHT >> 1;
+	mlx->half_width = WIN_W >> 1;
+	mlx->half_height = WIN_H >> 1;
 }

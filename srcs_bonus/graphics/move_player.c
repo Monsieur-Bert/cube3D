@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
+/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 14:20:55 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/04 15:48:20 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/07 16:08:42 by antauber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,13 @@ static void	move_forward_backward(t_cube *cube, int dir, double speed)
 	dir_y = cube->ray.dir_y;
 	dir_x = cube->ray.dir_x;
 	if ((cube->map.map[(int)y][(int)(x + dir_x * speed * dir)] != '1'
+		&& cube->map.map[(int)y][(int)(x + dir_x * speed * dir)] != 'F'
 		&& cube->map.map[(int)y][(int)(x + dir_x * speed * dir)] != 'D')
 		|| (cube->map.map[(int)y][(int)(x + dir_x * speed * dir)] == 'D'
 		&& !door_close(&cube->door, y, (x + dir_x * speed * dir), NO_RL)))
 		cube->ray.pos_x += cube->ray.dir_x * speed * dir;
 	if ((cube->map.map[(int)(y + dir_y * speed * dir)][(int)x] != '1'
+		&& cube->map.map[(int)(y + dir_y * speed * dir)][(int)x] != 'F'
 		&& cube->map.map[(int)(y + dir_y * speed * dir)][(int)x] != 'D')
 		|| (cube->map.map[(int)(y + dir_y * speed * dir)][(int)x] == 'D'
 		&& !door_close(&cube->door, (y + dir_y * speed * dir), x, NO_RL)))
@@ -47,11 +49,13 @@ static void	move_right_left(t_cube *cube, int dir, double speed)
 	dir_y = cube->ray.dir_y;
 	dir_x = cube->ray.dir_x;
 	if ((cube->map.map[(int)y][(int)(x - dir_y * speed * dir)] != '1'
+		&& cube->map.map[(int)y][(int)(x - dir_y * speed * dir)] != 'F'
 		&& cube->map.map[(int)y][(int)(x - dir_y * speed * dir)] != 'D')
 		|| (cube->map.map[(int)y][(int)(x - dir_y * speed * dir)] == 'D'
 		&& !door_close(&cube->door, y, (x - dir_y * speed * dir), RL_X)))
 		cube->ray.pos_x -= cube->ray.dir_y * speed * dir;
 	if ((cube->map.map[(int)(y + dir_x * speed * dir)][(int)x] != '1'
+		&& cube->map.map[(int)(y + dir_x * speed * dir)][(int)x] != 'F'
 		&& cube->map.map[(int)(y + dir_x * speed * dir)][(int)x] != 'D')
 		|| (cube->map.map[(int)(y + dir_x * speed * dir)][(int)x] == 'D'
 		&& !door_close(&cube->door, (y + dir_x * speed * dir), x, RL_Y)))
@@ -97,7 +101,7 @@ void	move_player(t_cube *cube, double delta_time)
 	if (cube->mlx.keys[L_RT_LEFT] == true)
 		rotate_player(&cube->ray, -1, rot_speed);
 	if (cube->mlx.keys[U_RT_UP] == true
-		&& (cube->mlx.half_height + cube->ray.offset < WIN_HEIGHT))
+		&& (cube->mlx.half_height + cube->ray.offset < WIN_H))
 		cube->ray.offset += 600 * delta_time;
 	if (cube->mlx.keys[D_RT_DOWN] == true
 		&& (cube->mlx.half_height + cube->ray.offset > 0))
