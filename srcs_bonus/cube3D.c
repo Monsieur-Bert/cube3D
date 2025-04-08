@@ -6,7 +6,7 @@
 /*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 10:55:56 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/02 13:02:09 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/08 13:58:04 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static int	parsing(char **tab, t_texture *img, t_map *map, t_mlx *mlx)
 		return (1);
 	if (maps(tab, 0) == 1)
 		return (1);
-	init_struct(tab, img, map);
+	if (init_struct(tab, img, map) == 1)
+		return (1);
 	mlx->sprites = sprites_lst(map->map);
 	return (0);
 }

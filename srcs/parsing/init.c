@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:45:14 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/01 15:54:22 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:57:19 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,8 @@ static int	no_space(char *rgb)
 	return (0);
 }
 
-static int	rgb(int *parsed_color, char *str)
+static int	rgb(int *parsed_color, char *str, char **rgb)
 {
-	char	**rgb;
 	t_color	color;
 
 	rgb = ft_split(str, ',');
@@ -62,6 +61,7 @@ static int	rgb(int *parsed_color, char *str)
 	color.b = ft_atoi(rgb[2]);
 	if (color.r > 255 || color.g > 255 || color.b > 255)
 	{
+		ft_free_tabstr(rgb);
 		print_error(ERR_VALUE);
 		return (1);
 	}
@@ -99,9 +99,9 @@ int	init_struct(char **tab, t_texture *img, t_map *map)
 	map->img.so = img->so;
 	map->img.we = img->we;
 	map->img.ea = img->ea;
-	if (rgb(&map->floor, img->f) == 1)
+	if (rgb(&map->floor, img->f, NULL) == 1)
 		return (1);
-	if (rgb(&map->ceiling, img->c) == 1)
+	if (rgb(&map->ceiling, img->c, NULL) == 1)
 		return (1);
 	return (0);
 }

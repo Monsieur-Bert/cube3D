@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3D.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 10:55:56 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/01 15:55:11 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/08 13:57:39 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static int	parsing(char **tab, t_texture *img, t_map *map)
 		return (1);
 	if (maps(tab, 0) == 1)
 		return (1);
-	init_struct(tab, img, map);
+	if (init_struct(tab, img, map) == 1)
+		return (1);
 	return (0);
 }
 
