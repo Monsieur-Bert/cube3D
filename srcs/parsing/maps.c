@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   maps.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:41:35 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/01 16:04:22 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/14 14:35:26 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,10 @@ static int	good_items(char **tab, int i, int j, int *p)
 	return (0);
 }
 
-int	maps(char **tab, int p)
+int	maps(char **tab, int p, int i)
 {
-	int	i;
 	int	j;
 
-	i = 5;
 	while (tab[++i])
 	{
 		j = -1;
@@ -83,6 +81,8 @@ int	maps(char **tab, int p)
 				return (1);
 		}
 	}
+	if (no_map(i) == 1)
+		return (1);
 	if (one_charactere(p) == 1)
 		return (1);
 	return (0);

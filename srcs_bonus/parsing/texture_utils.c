@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 12:54:09 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/01 15:59:51 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/14 13:55:41 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	check_color(char *color, char *str, int count)
 		if ((!ft_isdigit(color[i]) && color[i] != ',')
 			|| (color[i] == ',' && color[i + 1] && color[i + 1] == ','))
 		{
-			print_error(ERR_SPACES);
+			print_error(ERR_COLOR);
 			return (1);
 		}
 		if (color[i] == ',')

@@ -6,7 +6,7 @@
 /*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:41:35 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/04 15:17:09 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/14 14:10:48 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ int	maps(char **tab, int p)
 				return (1);
 		}
 	}
+	if (no_map(i) == 1)
+		return (1);
 	if (one_charactere(p) == 1)
 		return (1);
 	return (0);

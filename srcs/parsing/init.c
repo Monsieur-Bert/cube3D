@@ -6,7 +6,7 @@
 /*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:45:14 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/08 13:57:19 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/14 13:38:02 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ static int	rgb(int *parsed_color, char *str, char **rgb)
 		ft_free_tabstr(rgb);
 		return (1);
 	}
-	color.r = ft_atoi(rgb[0]);
-	color.g = ft_atoi(rgb[1]);
-	color.b = ft_atoi(rgb[2]);
+	color.r = ft_ato(rgb[0]);
+	color.g = ft_ato(rgb[1]);
+	color.b = ft_ato(rgb[2]);
 	if (color.r > 255 || color.g > 255 || color.b > 255)
 	{
 		ft_free_tabstr(rgb);

@@ -6,7 +6,7 @@
 /*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 10:55:56 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/08 13:58:04 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/14 14:30:33 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	init_texture(&img);
-	cube.tab = create_tab(argv[1]);
+	cube.tab = create_tab(argv[1], NULL);
 	if (!cube.tab)
 		return (1);
 	if (parsing(cube.tab, &img, &cube.map, &cube.mlx) == 1)

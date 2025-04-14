@@ -6,7 +6,7 @@
 /*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:43:30 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/08 11:52:15 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/14 14:31:32 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	skip_element(char *str, int *i)
 			info++;
 		if (info == 6)
 		{
-			while (str[*i] != '\n')
+			while (str[*i] && str[*i] != '\n')
 				(*i)++;
 			break ;
 		}
@@ -71,16 +71,16 @@ static int	backslash(char *str)
 		if (str[i] == '\n' && str[i - 1] == '\n')
 		{
 			free(str);
+			print_error(ERR_CONTENT);
 			return (1);
 		}
 	}
 	return (0);
 }
 
-char	**create_tab(char *file)
+char	**create_tab(char *file, char *str)
 {
 	int		fd;
-	char	*str;
 	char	**tab;
 
 	if (!(ft_strstr(file, ".cub", 4)))
@@ -91,7 +91,10 @@ char	**create_tab(char *file)
 	fd = open(file, O_RDONLY);
 	str = read_fd(fd, 0);
 	if (!str)
+	{
+		print_error(ERR_EMPTY);
 		return (NULL);
+	}
 	if (backslash(str) == 1)
 		return (NULL);
 	tab = ft_split(str, '\n');

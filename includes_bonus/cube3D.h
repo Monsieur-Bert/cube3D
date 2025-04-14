@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cube3D.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:19:57 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/07 16:31:02 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/14 14:30:16 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@ void	print_error(char *str);
 //init.c
 void	init_texture(t_texture *img);
 int		init_struct(char **tab, t_texture *img, t_map *map);
+int		ft_ato(const char *nptr);
+int		no_map(int i);
 
 //create_tab.c
-char	**create_tab(char *file);
+char	**create_tab(char *file, char *str);
 
 //texture_utils.c
 int		check_color(char *color, char *str, int count);

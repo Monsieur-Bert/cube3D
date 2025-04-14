@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:40:24 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/01 15:58:59 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/14 14:37:12 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static int	good_texture(t_texture *img)
 	return (0);
 }
 
-static char	*identidier(char *str, char *to_find)
+static char	*identifier(char *str, char *to_find)
 {
 	int	i;
 	int	com;
@@ -69,19 +69,19 @@ int	texture(char **tab, t_texture *img)
 	int	i;
 
 	i = 0;
-	while (i < 6)
+	while (tab[i] && i < 6)
 	{
-		if (identidier(tab[i], "NO"))
+		if (identifier(tab[i], "NO"))
 			img->no = add_texture(tab[i], "NO");
-		else if (identidier(tab[i], "SO"))
+		else if (identifier(tab[i], "SO"))
 			img->so = add_texture(tab[i], "SO");
-		else if (identidier(tab[i], "WE"))
+		else if (identifier(tab[i], "WE"))
 			img->we = add_texture(tab[i], "WE");
-		else if (identidier(tab[i], "EA"))
+		else if (identifier(tab[i], "EA"))
 			img->ea = add_texture(tab[i], "EA");
-		else if (identidier(tab[i], "F"))
+		else if (identifier(tab[i], "F"))
 			img->f = add_texture(tab[i], "F");
-		else if (identidier(tab[i], "C"))
+		else if (identifier(tab[i], "C"))
 			img->c = add_texture(tab[i], "C");
 		i++;
 	}

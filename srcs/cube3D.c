@@ -6,7 +6,7 @@
 /*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 10:55:56 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/08 13:57:39 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/14 14:34:54 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	parsing(char **tab, t_texture *img, t_map *map)
 {
 	if (texture(tab, img) == 1)
 		return (1);
-	if (maps(tab, 0) == 1)
+	if (maps(tab, 0, 5) == 1)
 		return (1);
 	if (init_struct(tab, img, map) == 1)
 		return (1);
@@ -39,7 +39,7 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	init_texture(&img);
-	cube.tab = create_tab(argv[1]);
+	cube.tab = create_tab(argv[1], NULL);
 	if (!cube.tab)
 		return (1);
 	if (parsing(cube.tab, &img, &cube.map) == 1)

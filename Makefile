@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: antauber <antauber@student.42.fr>          +#+  +:+       +#+         #
+#    By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/08 08:19:19 by antauber          #+#    #+#              #
-#    Updated: 2025/04/07 16:28:07 by antauber         ###   ########.fr        #
+#    Updated: 2025/04/14 13:41:06 by ygorget          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,8 @@ SRCS		:=	cube3D.c\
 				parsing/init.c				parsing/create_tab.c\
 				parsing/read_fd.c			parsing/read_fd_utils.c\
 				parsing/maps.c				parsing/maps_utils.c\
-				parsing/texture.c			parsing/texture_utils.c
+				parsing/texture.c			parsing/texture_utils.c\
+				parsing/init_utils.c
 SRCS		:=	$(SRCS:%=$(SRCS_DIR)/%)
 
 SRCS_B_DIR	:=	srcs_bonus
@@ -56,8 +57,7 @@ SRCS_B		:=	cube3D.c\
 				parsing/maps.c				parsing/maps_utils.c\
 				parsing/texture.c			parsing/texture_utils.c\
 				parsing/build_door.c  		parsing/sprites_utils.c\
-				parsing/sprites_sort.c
-
+				parsing/init_utils.c		parsing/sprites_sort.c
 SRCS_B		:=	$(SRCS_B:%=$(SRCS_B_DIR)/%)
 
 BUILD_DIR	:=	.build
