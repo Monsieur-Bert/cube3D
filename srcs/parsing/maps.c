@@ -6,7 +6,7 @@
 /*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 14:41:35 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/14 14:35:26 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/17 14:27:21 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ static int	check_around(char **tab, int i, int j)
 {
 	if (j == 0 || i + 1 == ft_maplen(tab))
 		return (1);
-	if (!wall_or_floor(tab[i + 1][j]) && !is_character(tab[i + 1][j]))
+	if ((int)ft_strlen(tab[i + 1]) < j
+		|| (!wall_or_floor(tab[i + 1][j]) && !is_character(tab[i + 1][j])))
 		return (1);
-	if (!wall_or_floor(tab[i - 1][j]) && !is_character(tab[i - 1][j]))
+	if ((int)ft_strlen(tab[i - 1]) < j
+		|| (!wall_or_floor(tab[i - 1][j]) && !is_character(tab[i - 1][j])))
 		return (1);
 	if (!wall_or_floor(tab[i][j + 1]) && !is_character(tab[i][j + 1]))
 		return (1);
@@ -52,7 +54,7 @@ static int	good_items(char **tab, int i, int j, int *p)
 	if (is_character(tab[i][j]))
 		(*p)++;
 	if (!wall_or_floor(tab[i][j]) && !is_character(tab[i][j])
-	&& tab[i][j] != ' ')
+	&& !ft_isspaces(tab[i][j]))
 	{
 		print_error(ERR_ITEMS);
 		return (1);

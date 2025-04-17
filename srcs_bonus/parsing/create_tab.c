@@ -6,7 +6,7 @@
 /*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 12:43:30 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/14 14:30:04 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/17 13:30:31 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,22 @@ static int	backslash(char *str)
 
 	i = -1;
 	skip_element(str, &i);
-	while (str[i] == '\n')
+	while (ft_isspaces(str[i]))
 		i++;
 	while (str[i] && str[++i])
 	{
 		if (str[i] == '\n' && str[i - 1] == '\n')
 		{
-			free(str);
-			print_error(ERR_CONTENT);
-			return (1);
+			while (str[i])
+			{
+				if (str[i] && str[i] != '\n' && !ft_isspaces(str[i]))
+				{
+					free(str);
+					print_error(ERR_CONTENT);
+					return (1);
+				}
+				i++;
+			}
 		}
 	}
 	return (0);

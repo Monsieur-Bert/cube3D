@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: antauber <antauber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 15:30:58 by antauber          #+#    #+#             */
-/*   Updated: 2025/04/07 16:26:47 by antauber         ###   ########.fr       */
+/*   Updated: 2025/04/17 15:10:24 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@ void	init_mlx(t_mlx *mlx)
 	init_img(&mlx->wall_ea);
 	init_img(&mlx->spt_fire[0]);
 	init_img(&mlx->spt_fire[1]);
+	init_img(&mlx->spt_fire[2]);
+	init_img(&mlx->spt_fire[3]);
 	init_img(&mlx->door);
 	mlx->init = NULL;
 	mlx->win = NULL;

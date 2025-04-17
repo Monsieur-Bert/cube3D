@@ -6,7 +6,7 @@
 /*   By: ygorget <ygorget@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:19:57 by ygorget           #+#    #+#             */
-/*   Updated: 2025/04/14 14:39:29 by ygorget          ###   ########.fr       */
+/*   Updated: 2025/04/17 13:41:25 by ygorget          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int		no_map(int i);
 char	**create_tab(char *file, char *str);
 
 //texture_utils.c
-int		check_color(char *color, char *str, int count);
+int		check_color(char *color, char *str, int count, int digit);
 int		check_space(char *img);
 
 //texture.c
